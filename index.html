@@ -1,110 +1,145 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!-- Font Style File -->
-    <link rel="stylesheet" href="./src/fonts/a2z/a2z.css">
-    <link rel="stylesheet" href="./src/fonts/pretendardvariable/pretendardvariable.css">
+    <link rel="stylesheet" href="./src/fonts/a2z/a2z.css" />
+    <link
+      rel="stylesheet"
+      href="./src/fonts/pretendardvariable/pretendardvariable.css"
+    />
     <!-- Main Style File -->
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css" />
     <!-- AlbumArt Code -->
     <script src="./src/album-art/script.js" defer></script>
-    <link rel="stylesheet" href="./src/album-art/styles.css">
+    <link rel="stylesheet" href="./src/album-art/styles.css" />
     <!-- ProgressBar Code -->
     <script src="./src/progress-bar/scripts.js" defer></script>
-    <link rel="stylesheet" href="./src/progress-bar/styles.css">
+    <link rel="stylesheet" href="./src/progress-bar/styles.css" />
     <!-- Lyrics Setting Dialog Code -->
     <script src="./src/lyrics-setting/scripts.js" defer></script>
-    <link rel="stylesheet" href="./src/lyrics-setting/styles.css">
+    <link rel="stylesheet" href="./src/lyrics-setting/styles.css" />
     <!-- Element Style File -->
-    <link rel="stylesheet" href="./src/music-artist-text-box/styles.css">
-    <link rel="stylesheet" href="./src/player-control/styles.css">
-    <link rel="stylesheet" href="./src/lyricsbox/styles.css">
+    <link rel="stylesheet" href="./src/music-artist-text-box/styles.css" />
+    <link rel="stylesheet" href="./src/player-control/styles.css" />
+    <link rel="stylesheet" href="./src/lyricsbox/styles.css" />
     <!-- Element Script File -->
-     <script src="./src/player-control/script.js" defer></script>
-</head>
-<body>
+    <script src="./src/player-control/script.js" defer></script>
+  </head>
+  <body>
     <dialog id="lyricsSetting">
-        <h1>가사 입력</h1>
-        <form method="dialog">
-            <button>닫기</button> 
-        </form>
+      <h1>가사 입력</h1>
+      <textarea
+        id="lyricsInput"
+        placeholder="가사를 입력하세요"
+        rows="10"
+        style="width: 100%; margin-bottom: 20px"
+      ></textarea>
+      <form
+        method="dialog"
+        style="display: flex; gap: 10px; justify-content: flex-end"
+      >
+        <button
+          id="saveLyricsBtn"
+          style="background-color: #007bff; color: white"
+        >
+          적용
+        </button>
+        <button>닫기</button>
+      </form>
     </dialog>
-    <main style="
+    <main
+      style="
         width: 1600px;
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-    ">  
-        <!-- 아트 + 가사 -->
-        <section id="mainBox" style="
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 140px;
-        ">
-            <!-- 앨범아트 + 곡 정보 -->
-            <div id="albumArt-musicInfo" class="shadow"style="width: 450px">
-                <input type="file" id="albumArtInput" accept="image/*">
-                <button id="albumArtButton"></button>
-                <div id="musicArtistTextBox">
-                    <input type="text" id="musicTitle" value="Music Name">
-                    <input type="text" id="artistName" value="Artist Name">
-                </div>
-            </div>
-            <div id="lyricsBox" class="shadow">
-                <p id="lyrics">가사1</p>
-                <p id="lyrics">가사2</p>
-                <p id="lyrics" class="post">가사3</p>
-                <p id="lyrics" class="post">가사4</p>
-                <p id="lyrics" class="focus">가사5</p>
-                <p id="lyrics" class="pre">가사6</p>
-                <p id="lyrics" class="pre">가사7</p>
-                <p id="lyrics">가사8</p>
-                <p id="lyrics">가사9</p>
-            </div>
-        </section>
-        <!-- 음악 제어 파트 -->
-        <div id="musicControl" style="
-            display: flex;
-            align-items:
-            center; gap: 60px;
-            padding: 36px 0;
-        ">
-            <!-- 셔플/이전/재생/다음/반복 -->
-            <div id="playerControl" class="shadow">
-                <button class="btn-small">
-                    <img src="src/icon/shuffle.svg" alt="shuffle">
-                </button>
-                <div id="main">
-                    <button class="btn-medium">
-                        <img src="src/icon/previous.svg" alt="previous">
-                    </button>
-                    <button class="btn-large">
-                        <img src="src/icon/play.svg" alt="play" id="play-pause">
-                    </button>
-                    <button class="btn-medium">
-                        <img src="src/icon/next.svg" alt="next">
-                    </button>
-                </div>
-                <button class="btn-small">
-                    <img src="src/icon/repeat.svg" alt="repeat">
-                </button>
-            </div>
-            <!-- 진행률 -->
-            <div id="progressBar" class="shadow">
-                <input type="text" id="currentTime" value="00:00" readonly="true" style="user-select: none;">
-                <div id="body">
-                    <span id="fill" style="width: 30%">
-                        <span id="thumb"></span>
-                    </span>
-                </div>
-                <input type="text" id="endTime" value="00:00" readonly="true" style="user-select: none;">
-            </div>
+      "
+    >
+      <!-- 아트 + 가사 -->
+      <section
+        id="mainBox"
+        style="
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 140px;
+        "
+      >
+        <!-- 앨범아트 + 곡 정보 -->
+        <div id="albumArt-musicInfo" class="shadow" style="width: 450px">
+          <input type="file" id="albumArtInput" accept="image/*" />
+          <button id="albumArtButton"></button>
+          <div id="musicArtistTextBox">
+            <input type="text" id="musicTitle" value="Music Name" />
+            <input type="text" id="artistName" value="Artist Name" />
+          </div>
         </div>
+        <div id="lyricsBox" class="shadow">
+          <p id="lyrics" class="post-focus"></p>
+          <p id="lyrics" class="post-focus"></p>
+          <p id="lyrics" class="focus">가사1</p>
+          <p id="lyrics" class="pre-focus">가사2</p>
+          <p id="lyrics" class="pre-focus">가사3</p>
+          <p id="lyrics" class="pre">가사4</p>
+          <p id="lyrics" class="pre">가사5</p>
+          <p id="lyrics" class="pre">가사6</p>
+          <p id="lyrics" class="pre">가사7</p>
+          <p id="lyrics" class="pre">가사8</p>
+          <p id="lyrics" class="pre">가사9</p>
+        </div>
+      </section>
+      <!-- 음악 제어 파트 -->
+      <div
+        id="musicControl"
+        style="display: flex; align-items: center; gap: 60px; padding: 36px 0"
+      >
+        <!-- 셔플/이전/재생/다음/반복 -->
+        <div id="playerControl" class="shadow">
+          <button class="btn-small">
+            <img src="src/icon/shuffle.svg" alt="shuffle" />
+          </button>
+          <div id="main">
+            <button class="btn-medium">
+              <img src="src/icon/previous.svg" alt="previous" />
+            </button>
+            <button class="btn-large">
+              <img src="src/icon/play.svg" alt="play" id="play-pause" />
+            </button>
+            <button class="btn-medium">
+              <img src="src/icon/next.svg" alt="next" />
+            </button>
+          </div>
+          <button class="btn-small">
+            <img src="src/icon/repeat.svg" alt="repeat" />
+          </button>
+        </div>
+        <!-- 진행률 -->
+        <div id="progressBar" class="shadow">
+          <input
+            type="text"
+            id="currentTime"
+            value="00:00"
+            readonly="true"
+            style="user-select: none"
+          />
+          <div id="body">
+            <span id="fill" style="width: 30%">
+              <span id="thumb"></span>
+            </span>
+          </div>
+          <input
+            type="text"
+            id="endTime"
+            value="00:00"
+            readonly="true"
+            style="user-select: none"
+          />
+        </div>
+      </div>
     </main>
-</body>
+  </body>
 </html>
