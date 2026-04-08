@@ -1,0 +1,27 @@
+#musicArtistTextBox {
+    margin-top: 16px;
+    padding: 20px 0;
+}
+
+#musicArtistTextBox > input[type="text"] {
+    display: block;
+    width: 100%;
+    font-family: 'A2Z', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    color: white;
+}
+
+#musicArtistTextBox > #musicTitle {
+    font-size: 42px;
+    font-weight: 600;
+}
+
+#musicArtistTextBox > #artistName {
+    margin-top: 8px;
+    font-size: 25px;
+    font-weight: 200;
+    opacity: 70%;
+}

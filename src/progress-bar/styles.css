@@ -1,0 +1,56 @@
+#progressBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 14px
+}
+
+#progressBar > input[type="text"] {
+    width: 60px;
+    font-family: 'A2Z', sans-serif;
+    font-weight: 200;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    color: white;
+}
+
+#progressBar > #currentTime {
+    text-align: right;
+}
+
+#progressBar > #endTime {
+    text-align: left;
+}
+
+#progressBar > #body {
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#progressBar > #body > #fill {
+    transition: width 0.1s linear;
+    will-change: width;
+    position: relative;
+    display: block;
+    /* width: 60%; */ /* 이 부분은 스크립트로 제어 */
+    height: 2px;
+    border-radius: 2px;
+    background-color: white;
+}
+
+#progressBar > #body > #fill > #thumb {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 6px;
+    background-color: white;
+}

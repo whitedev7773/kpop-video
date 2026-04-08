@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Font Style File -->
+    <link rel="stylesheet" href="./src/fonts/a2z/a2z.css">
+    <link rel="stylesheet" href="./src/fonts/pretendardvariable/pretendardvariable.css">
+    <!-- Main Style File -->
+    <link rel="stylesheet" href="./styles.css">
+    <!-- AlbumArt Code -->
+    <script src="./src/album-art/script.js" defer></script>
+    <link rel="stylesheet" href="./src/album-art/styles.css">
+    <!-- ProgressBar Code -->
+    <script src="./src/progress-bar/scripts.js" defer></script>
+    <link rel="stylesheet" href="./src/progress-bar/styles.css">
+    <!-- Element Style File -->
+    <link rel="stylesheet" href="./src/music-artist-text-box/styles.css">
+    <link rel="stylesheet" href="./src/player-control/styles.css">
+    <!-- Element Script File -->
+     <script src="./src/player-control/script.js" defer></script>
+</head>
+<body>
+    <main style="
+        width: 1600px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    ">
+        <!-- 앨범아트 + 곡 정보 -->
+        <div id="albumArt-musicInfo" class="shadow"style="width: 450px">
+            <input type="file" id="albumArtInput" accept="image/*">
+            <button id="albumArtButton"></button>
+            <div id="musicArtistTextBox">
+                <input type="text" id="musicTitle" value="Music Name">
+                <input type="text" id="artistName" value="Artist Name">
+            </div>
+        </div>
+        <!-- 음악 제어 파트 -->
+        <div id="musicControl" style="
+            display: flex;
+            align-items:
+            center; gap: 60px;
+            padding: 36px 0;
+        ">
+            <!-- 셔플/이전/재생/다음/반복 -->
+            <div id="playerControl" class="shadow">
+                <button class="btn-small">
+                    <img src="src/icon/shuffle.svg" alt="shuffle">
+                </button>
+                <div id="main">
+                    <button class="btn-medium">
+                        <img src="src/icon/previous.svg" alt="previous">
+                    </button>
+                    <button class="btn-large">
+                        <img src="src/icon/play.svg" alt="play" id="play-pause">
+                    </button>
+                    <button class="btn-medium">
+                        <img src="src/icon/next.svg" alt="next">
+                    </button>
+                </div>
+                <button class="btn-small">
+                    <img src="src/icon/repeat.svg" alt="repeat">
+                </button>
+            </div>
+            <!-- 진행률 -->
+            <div id="progressBar" class="shadow">
+                <input type="text" id="currentTime" value="00:00" readonly="true" style="user-select: none;">
+                <div id="body">
+                    <span id="fill" style="width: 30%">
+                        <span id="thumb"></span>
+                    </span>
+                </div>
+                <input type="text" id="endTime" value="00:00" readonly="true" style="user-select: none;">
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,25 @@
+#playerControl {
+    min-width: 450px;
+    width: 450px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 26px;
+}
+
+#playerControl > #main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+
+#playerControl button {
+    background-color: transparent;
+}
+
+#playerControl .btn-small {
+    opacity: 0.5;
+}

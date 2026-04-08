@@ -1,0 +1,27 @@
+#albumArtButton {
+    margin: 0;
+    padding: 0;
+
+    width: 450px;
+    height: 450px;
+
+    /* 배경 이미지 초기 설정 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f0f0f0;
+    background-image: url(./init_art.png);
+
+    cursor: pointer;
+
+    border-radius: 26px;
+}
+
+#albumArtButton:hover {
+    opacity: 0.8;
+}
+
+/* 실제 파일 선택 창은 숨기기 */
+#albumArtInput {
+    display: none;
+}
