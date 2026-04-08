@@ -138,3 +138,15 @@ audio.addEventListener("timeupdate", () => {
     bgVideo.currentTime = audio.currentTime;
   }
 });
+
+// 단축키 Tab: 배경 블러 토글
+let isBlurred = true;
+window.addEventListener("keydown", (e) => {
+  // 텍스트, 입력창, 등에서는 단축키 동작 무시
+  if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
+
+  if (e.key === "Tab") {
+    isBlurred = !isBlurred;
+    bgVideo.style.filter = isBlurred ? "blur(26px)" : "blur(0px)";
+  }
+});
