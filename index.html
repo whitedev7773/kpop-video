@@ -29,6 +29,26 @@
     <script src="./src/player-control/script.js" defer></script>
   </head>
   <body>
+    <video
+      id="bgVideo"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+      "
+      muted
+      playsinline
+    ></video>
+    <input
+      type="file"
+      id="bgVideoInput"
+      accept="video/*"
+      style="display: none"
+    />
     <dialog id="lyricsSetting">
       <h1>가사 입력</h1>
       <textarea
@@ -56,7 +76,7 @@
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, calc(-50% + 20px));
       "
     >
       <!-- 아트 + 가사 -->
@@ -67,6 +87,7 @@
           flex-direction: row;
           align-items: center;
           gap: 140px;
+          margin-bottom: 20px;
         "
       >
         <!-- 앨범아트 + 곡 정보 -->
@@ -81,9 +102,10 @@
         <div id="lyricsBox" class="shadow">
           <p id="lyrics" class="post-focus"></p>
           <p id="lyrics" class="post-focus"></p>
-          <p id="lyrics" class="focus">가사1</p>
+          <p id="lyrics" class="focus"></p>
+          <p id="lyrics" class="pre-focus">가사1</p>
           <p id="lyrics" class="pre-focus">가사2</p>
-          <p id="lyrics" class="pre-focus">가사3</p>
+          <p id="lyrics" class="pre">가사3</p>
           <p id="lyrics" class="pre">가사4</p>
           <p id="lyrics" class="pre">가사5</p>
           <p id="lyrics" class="pre">가사6</p>

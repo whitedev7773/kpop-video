@@ -22,10 +22,11 @@
 
 #lyricsBox > #lyrics.post {
   opacity: 0;
+  transform: translate(-50%, calc(-50% - 312px));
 }
 
 #lyricsBox > #lyrics.post-focus:nth-child(1 of .post-focus) {
-  opacity: 0.5;
+  opacity: 0.3;
   transform: translate(-50%, calc(-50% - 210px));
 }
 
@@ -46,11 +47,11 @@
 }
 
 #lyricsBox > #lyrics.pre-focus:nth-child(2 of .pre-focus) {
-  opacity: 0.5;
+  opacity: 0.3;
   transform: translate(-50%, calc(-50% + 210px));
 }
 
 #lyricsBox > #lyrics.pre {
   opacity: 0;
-  transform: translate(-50%, calc(-50% + 306px));
+  transform: translate(-50%, calc(-50% + 312px));
 }
