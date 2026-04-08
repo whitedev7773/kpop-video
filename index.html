@@ -15,29 +15,58 @@
     <!-- ProgressBar Code -->
     <script src="./src/progress-bar/scripts.js" defer></script>
     <link rel="stylesheet" href="./src/progress-bar/styles.css">
+    <!-- Lyrics Setting Dialog Code -->
+    <script src="./src/lyrics-setting/scripts.js" defer></script>
+    <link rel="stylesheet" href="./src/lyrics-setting/styles.css">
     <!-- Element Style File -->
     <link rel="stylesheet" href="./src/music-artist-text-box/styles.css">
     <link rel="stylesheet" href="./src/player-control/styles.css">
+    <link rel="stylesheet" href="./src/lyricsbox/styles.css">
     <!-- Element Script File -->
      <script src="./src/player-control/script.js" defer></script>
 </head>
 <body>
+    <dialog id="lyricsSetting">
+        <h1>가사 입력</h1>
+        <form method="dialog">
+            <button>닫기</button> 
+        </form>
+    </dialog>
     <main style="
         width: 1600px;
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-    ">
-        <!-- 앨범아트 + 곡 정보 -->
-        <div id="albumArt-musicInfo" class="shadow"style="width: 450px">
-            <input type="file" id="albumArtInput" accept="image/*">
-            <button id="albumArtButton"></button>
-            <div id="musicArtistTextBox">
-                <input type="text" id="musicTitle" value="Music Name">
-                <input type="text" id="artistName" value="Artist Name">
+    ">  
+        <!-- 아트 + 가사 -->
+        <section id="mainBox" style="
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 140px;
+        ">
+            <!-- 앨범아트 + 곡 정보 -->
+            <div id="albumArt-musicInfo" class="shadow"style="width: 450px">
+                <input type="file" id="albumArtInput" accept="image/*">
+                <button id="albumArtButton"></button>
+                <div id="musicArtistTextBox">
+                    <input type="text" id="musicTitle" value="Music Name">
+                    <input type="text" id="artistName" value="Artist Name">
+                </div>
             </div>
-        </div>
+            <div id="lyricsBox" class="shadow">
+                <p id="lyrics">가사1</p>
+                <p id="lyrics">가사2</p>
+                <p id="lyrics" class="post">가사3</p>
+                <p id="lyrics" class="post">가사4</p>
+                <p id="lyrics" class="focus">가사5</p>
+                <p id="lyrics" class="pre">가사6</p>
+                <p id="lyrics" class="pre">가사7</p>
+                <p id="lyrics">가사8</p>
+                <p id="lyrics">가사9</p>
+            </div>
+        </section>
         <!-- 음악 제어 파트 -->
         <div id="musicControl" style="
             display: flex;

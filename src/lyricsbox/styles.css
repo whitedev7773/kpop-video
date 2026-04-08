@@ -1,0 +1,17 @@
+#lyricsBox > #lyrics {
+    opacity: 0;
+    text-align: left;
+    font-family: "A2Z", sans-serif;
+    font-weight: 700;
+    font-size: 47.6px;
+    /* font-size: 56px; */
+    color: white;
+}
+#lyricsBox > #lyrics.post, #lyricsBox > #lyrics.pre {
+    opacity: 0.5;
+}
+
+#lyricsBox > #lyrics.focus {
+    opacity: 1;
+    font-size: 56px;
+}

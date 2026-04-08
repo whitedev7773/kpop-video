@@ -20,6 +20,10 @@
     background-color: transparent;
 }
 
+#playerControl button {
+    height: 30px
+}
+
 #playerControl .btn-small {
     opacity: 0.5;
 }

@@ -1,0 +1,39 @@
+/* 1. 기본 상태 (열려 있을 때) */
+#lyricsSetting {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: 
+    opacity 0.3s ease, 
+    transform 0.3s ease, 
+    display 0.3s allow-discrete; /* display 변경 시 애니메이션 허용 */
+}
+
+/* 2. 처음 나타날 때의 시작 지점 */
+@starting-style {
+  #lyricsSetting[open] {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}
+
+/* 3. 닫힐 때의 상태 (닫기 애니메이션을 위해 필요) */
+#lyricsSetting:not([open]) {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* 4. 배경(Backdrop) 애니메이션 */
+#lyricsSetting::backdrop {
+  background-color: rgba(0, 0, 0, 0);
+  transition: display 0.3s allow-discrete, background-color 0.3s;
+}
+
+#lyricsSetting[open]::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@starting-style {
+  #lyricsSetting[open]::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
