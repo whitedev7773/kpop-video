@@ -56,6 +56,12 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+// 처음으로 되돌릴 때 가사 위치 초기화 이벤트 리스너
+window.addEventListener("resetLyrics", () => {
+  currentLyricIndex = 2;
+  updateLyricsClasses();
+});
+
 saveLyricsBtn.addEventListener("click", (e) => {
   // 다이얼로그 닫히기 전에 가사 렌더링 로직 실행
   e.preventDefault();
@@ -85,6 +91,8 @@ saveLyricsBtn.addEventListener("click", (e) => {
     p.textContent = line.trim() === "" ? "\u00A0" : line;
     lyricsBox.appendChild(p);
   });
+
+  createEmptyP();
 
   currentLyricIndex = 2; // 새로운 가사 적용 시 첫 줄(인덱스 2)로 초기화
   updateLyricsClasses(); // 전체 클래스 업데이트

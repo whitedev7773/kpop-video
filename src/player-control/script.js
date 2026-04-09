@@ -6,6 +6,9 @@ musicInput.accept = "audio/*";
 const nextBtn = document.querySelector(
   '.btn-medium img[alt="next"]',
 ).parentElement;
+const prevBtn = document.querySelector(
+  '.btn-medium img[alt="previous"]',
+).parentElement;
 const playBtn = document.querySelector(".btn-large");
 const playIcon = document.getElementById("play-pause");
 const progressBarFill = document.getElementById("fill");
@@ -79,6 +82,17 @@ playBtn.addEventListener("click", () => {
   }
 });
 
+// 3. Previous 버튼: 미디어 0초로 되감기 및 가사 처음으로 이동 이벤트를 발생시킴
+prevBtn.addEventListener("click", () => {
+  if (audio.src) {
+    audio.currentTime = 0;
+    if (bgVideo.src) bgVideo.currentTime = 0;
+    updateProgress();
+    // 가사를 처음으로 되돌리기 위한 커스텀 이벤트 호출
+    window.dispatchEvent(new Event("resetLyrics"));
+  }
+});
+
 // 메타데이터가 로드되면 총 시간 표시
 audio.addEventListener("loadedmetadata", () => {
   endTimeText.value = formatTime(audio.duration);
@@ -146,6 +160,7 @@ window.addEventListener("keydown", (e) => {
   if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
 
   if (e.key === "Tab") {
+    e.preventDefault(); // 기본 Focus 이동(선택) 방지
     isBlurred = !isBlurred;
     bgVideo.style.filter = isBlurred ? "blur(26px)" : "blur(0px)";
   }

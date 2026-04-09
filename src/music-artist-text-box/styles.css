@@ -1,27 +1,28 @@
 #musicArtistTextBox {
-    margin-top: 16px;
-    padding: 20px 0;
+  margin-top: 16px;
+  padding: 20px 0;
 }
 
 #musicArtistTextBox > input[type="text"] {
-    display: block;
-    width: 100%;
-    font-family: 'A2Z', sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    background-color: transparent;
-    color: white;
+  display: block;
+  width: 100%;
+  font-family: "A2Z", sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0 0 5px 0; /* 하단 여백을 주어 글자 잘림 방지 */
+  line-height: 1.4; /* 줄 간격 확보 */
+  background-color: transparent;
+  color: white;
 }
 
 #musicArtistTextBox > #musicTitle {
-    font-size: 42px;
-    font-weight: 600;
+  font-size: 42px;
+  font-weight: 600;
 }
 
 #musicArtistTextBox > #artistName {
-    margin-top: 8px;
-    font-size: 25px;
-    font-weight: 200;
-    opacity: 70%;
+  margin-top: 8px;
+  font-size: 25px;
+  font-weight: 200;
+  opacity: 70%;
 }
