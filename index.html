@@ -25,9 +25,10 @@
     <input type="file" id="bgVideoInput" accept="video/*" />
     <dialog id="lyricsSetting">
       <h1>가사 입력</h1>
+      <p id="lyricsHint">시간 자동 싱크: <code>[mm:ss]</code> 또는 <code>[mm:ss.00]</code> 형식으로 입력<br>시간 없이 입력하면 수동(↑↓) 모드</p>
       <textarea
         id="lyricsInput"
-        placeholder="가사를 입력하세요"
+        placeholder="[00:05.15] 첫 번째 가사&#10;[00:10.30] 두 번째 가사&#10;또는 시간 없이 가사만 입력"
         rows="10"
       ></textarea>
       <form method="dialog">

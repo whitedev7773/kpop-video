@@ -47,6 +47,7 @@ function updateProgress() {
     const progressPercent = (audio.currentTime / audio.duration) * 100;
     progressBarFill.style.width = `${progressPercent}%`;
     currentTimeText.value = formatTime(audio.currentTime);
+    window.dispatchEvent(new CustomEvent("lyricsTimeUpdate", { detail: { currentTime: audio.currentTime } }));
     animationFrameId = requestAnimationFrame(updateProgress);
   }
 }

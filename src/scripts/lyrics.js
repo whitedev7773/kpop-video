@@ -6,19 +6,51 @@ const lyricsBox = document.getElementById("lyricsBox");
 // 가사 요소 캐시 — querySelectorAll을 매번 호출하지 않도록 유지
 let lyricsElements = [];
 
+// 시간 싱크 데이터: lyricsElements[3+i]에 대응하는 {time: number|null, text: string}
+let lyricsData = [];
+let timedMode = false; // 하나라도 timestamp가 있으면 true
+
 function refreshLyricsCache() {
   lyricsElements = Array.from(lyricsBox.querySelectorAll("p"));
 }
 
+// "[mm:ss] 텍스트" 또는 "[mm:ss.ss] 텍스트" 파싱
+function parseLyricLine(line) {
+  const match = line.match(/^\[(\d{1,2}):(\d{2})(?:\.(\d+))?\]\s*(.*)/);
+  if (match) {
+    const min = parseInt(match[1]);
+    const sec = parseInt(match[2]);
+    const ms = match[3] ? parseInt(match[3]) / Math.pow(10, match[3].length) : 0;
+    return { time: min * 60 + sec + ms, text: match[4] };
+  }
+  return { time: null, text: line.trim() };
+}
+
+// 현재 오디오 시간에 맞는 lyric index 계산 (lyricsElements 기준)
+function getLyricIndexAtTime(currentTime) {
+  let newIndex = 2; // 기본값: 첫 padding 이전 (아무 가사도 아직 안 나온 상태)
+  for (let i = 0; i < lyricsData.length; i++) {
+    if (lyricsData[i].time !== null && lyricsData[i].time <= currentTime) {
+      newIndex = i + 3; // 앞에 padding 3개 offset
+    }
+  }
+  return newIndex;
+}
+
 lyricsBox.addEventListener("click", () => {
   // 다이얼로그 열기 전에 기존 가사를 텍스트에어리어에 채워넣기 (맨 앞의 빈 구조 태그 3개 제외)
-  const currentLyrics = lyricsElements
-    .slice(3) // 첫 3개 요소(사용자가 입력하지 않은 기본 패딩 용도)를 제외
-    .map((p) => (p.textContent === "\u00A0" ? "" : p.textContent))
+  const currentLyrics = lyricsData
+    .map((d) => {
+      if (d.time === null) return d.text === "\u00A0" ? "" : d.text;
+      const min = Math.floor(d.time / 60).toString().padStart(2, "0");
+      const sec = Math.floor(d.time % 60).toString().padStart(2, "0");
+      const frac = d.time % 1;
+      const msStr = frac >= 0.005 ? "." + Math.round(frac * 100).toString().padStart(2, "0") : "";
+      return `[${min}:${sec}${msStr}] ${d.text}`;
+    })
     .join("\n");
   lyricsInput.value = currentLyrics;
 
-  // .show()는 일반 팝업, .showModal()은 배경이 어두워지는 모달입니다.
   dialog.showModal();
 });
 
@@ -42,8 +74,21 @@ document.addEventListener("DOMContentLoaded", () => {
   updateLyricsClasses();
 });
 
+// 재생 시간에 따른 자동 가사 전환
+window.addEventListener("lyricsTimeUpdate", (e) => {
+  if (!timedMode) return;
+  const newIndex = getLyricIndexAtTime(e.detail.currentTime);
+  if (newIndex !== currentLyricIndex) {
+    currentLyricIndex = newIndex;
+    updateLyricsClasses();
+  }
+});
+
 window.addEventListener("keydown", (e) => {
   if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+
+  // timed 모드에서는 화살표 키로 수동 조작하지 않음
+  if (timedMode) return;
 
   if (e.key === "ArrowUp") {
     if (currentLyricIndex > 2) {
@@ -52,7 +97,6 @@ window.addEventListener("keydown", (e) => {
     }
     e.preventDefault();
   } else if (e.key === "ArrowDown") {
-    // 맨 마지막 줄이 focus 될 수 있도록 (더 이상 내려갈 수 없으면 멈춤)
     if (currentLyricIndex < lyricsElements.length - 1) {
       currentLyricIndex++;
       updateLyricsClasses();
@@ -68,34 +112,49 @@ window.addEventListener("resetLyrics", () => {
 });
 
 saveLyricsBtn.addEventListener("click", (e) => {
-  // 다이얼로그 닫히기 전에 가사 렌더링 로직 실행
   e.preventDefault();
+
+  const lines = lyricsInput.value.split("\n");
+  const parsed = lines.map(parseLyricLine);
+
+  // 하나라도 timestamp가 있으면 timed 모드
+  timedMode = parsed.some((d) => d.time !== null);
+
+  // timestamp가 있는 경우 time 기준으로 정렬
+  if (timedMode) {
+    parsed.sort((a, b) => {
+      if (a.time === null && b.time === null) return 0;
+      if (a.time === null) return 1;
+      if (b.time === null) return -1;
+      return a.time - b.time;
+    });
+  }
+
+  lyricsData = parsed;
 
   const fragment = document.createDocumentFragment();
 
   const addLine = (text) => {
     const p = document.createElement("p");
     p.className = "lyric-line";
-    p.textContent = text || "\u00A0"; // 공백을 넣어 높이 유지
+    p.textContent = text || "\u00A0";
     fragment.appendChild(p);
   };
 
-  // 맨 앞에 빈 p 3개 추가 (초기엔 0, 1번이 post-focus, 2번이 focus)
+  // 맨 앞에 빈 p 3개 추가 (패딩)
   addLine("");
   addLine("");
   addLine("");
 
-  // 줄바꿈을 기준으로 분리 후 각 줄마다 p 태그 생성
-  lyricsInput.value.split("\n").forEach((line) => addLine(line.trim()));
+  parsed.forEach((d) => addLine(d.text));
 
   addLine("");
 
-  // 단 1회 DOM 삽입 (기존 innerHTML 초기화 + fragment 추가)
   lyricsBox.innerHTML = "";
   lyricsBox.appendChild(fragment);
 
   refreshLyricsCache();
-  currentLyricIndex = 2; // 새로운 가사 적용 시 첫 줄(인덱스 2)로 초기화
+  currentLyricIndex = 2;
   updateLyricsClasses();
 
   dialog.close();

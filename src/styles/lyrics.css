@@ -59,6 +59,20 @@
   color: var(--color-text-dark);
 }
 
+#lyricsHint {
+  margin: -10px 0 14px;
+  font-size: 13px;
+  color: #888;
+  line-height: 1.6;
+}
+
+#lyricsHint code {
+  background: #f0f0f0;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
 #lyricsInput {
   width: 100%;
   margin-bottom: 20px;
