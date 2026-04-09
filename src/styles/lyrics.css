@@ -131,7 +131,7 @@
 
 #lyricsBox > .lyric-line {
   position: absolute;
-  transition: all var(--transition-lyrics) ease;
+  transition: all var(--transition-lyrics) cubic-bezier(0.34, 1.4, 0.64, 1);
   margin: 0;
   padding: 0;
   text-align: left;
@@ -147,35 +147,42 @@
 #lyricsBox > .lyric-line.post {
   opacity: 0;
   transform: translate(-50%, calc(-50% - 312px));
+  transition-delay: 0s;
 }
 
 #lyricsBox > .lyric-line.post-focus:nth-child(1 of .post-focus) {
   opacity: 0.3;
   transform: translate(-50%, calc(-50% - 210px));
+  transition-delay: 0.02s;
 }
 
 #lyricsBox > .lyric-line.post-focus:nth-child(2 of .post-focus) {
   opacity: 0.5;
   transform: translate(-50%, calc(-50% - 108px));
+  transition-delay: 0.04s;
 }
 
 #lyricsBox > .lyric-line.focus {
   opacity: 1;
   font-size: 56px;
   transform: translate(-50%, -50%);
+  transition-delay: 0.06s;
 }
 
 #lyricsBox > .lyric-line.pre-focus:nth-child(1 of .pre-focus) {
   opacity: 0.5;
   transform: translate(-50%, calc(-50% + 108px));
+  transition-delay: 0.08s;
 }
 
 #lyricsBox > .lyric-line.pre-focus:nth-child(2 of .pre-focus) {
   opacity: 0.3;
   transform: translate(-50%, calc(-50% + 210px));
+  transition-delay: 0.1s;
 }
 
 #lyricsBox > .lyric-line.pre {
   opacity: 0;
   transform: translate(-50%, calc(-50% + 312px));
+  transition-delay: 0.12s;
 }
