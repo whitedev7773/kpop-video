@@ -1,3 +1,10 @@
+// 상수
+const ICON = {
+  play:  "src/assets/icons/play.svg",
+  pause: "src/assets/icons/pause.svg",
+};
+const SYNC_THRESHOLD = 0.25; // 초 단위 허용 오차
+
 const audio = new Audio();
 const musicInput = document.createElement("input");
 musicInput.type = "file";
@@ -25,6 +32,15 @@ function formatTime(seconds) {
   return `${min.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
 }
 
+// 재생 상태에 따라 아이콘 전환
+function setPlayState(playing) {
+  playIcon.src = playing ? ICON.pause : ICON.play;
+  playIcon.alt = playing ? "pause" : "play";
+}
+
+// 배경 영상 존재 여부 확인
+const hasVideo = () => Boolean(bgVideo.src);
+
 // 부드러운 업데이트 함수
 function updateProgress() {
   if (!audio.paused && audio.duration) {
@@ -49,8 +65,7 @@ musicInput.addEventListener("change", (e) => {
     audio.load(); // 메타데이터 로드 강제
 
     // UI 초기화
-    playIcon.src = "src/icon/play.svg";
-    playIcon.alt = "play";
+    setPlayState(false);
     progressBarFill.style.width = "0%";
     currentTimeText.value = "00:00";
     document.getElementById("musicTitle").value = file.name.replace(
@@ -71,13 +86,11 @@ playBtn.addEventListener("click", () => {
 
   if (audio.paused) {
     audio.play();
-    playIcon.src = "src/icon/pause.svg";
-    playIcon.alt = "pause";
+    setPlayState(true);
     animationFrameId = requestAnimationFrame(updateProgress);
   } else {
     audio.pause();
-    playIcon.src = "src/icon/play.svg";
-    playIcon.alt = "play";
+    setPlayState(false);
     cancelAnimationFrame(animationFrameId);
   }
 });
@@ -86,7 +99,7 @@ playBtn.addEventListener("click", () => {
 prevBtn.addEventListener("click", () => {
   if (audio.src) {
     audio.currentTime = 0;
-    if (bgVideo.src) bgVideo.currentTime = 0;
+    if (hasVideo()) bgVideo.currentTime = 0;
     updateProgress();
     // 가사를 처음으로 되돌리기 위한 커스텀 이벤트 호출
     window.dispatchEvent(new Event("resetLyrics"));
@@ -100,8 +113,7 @@ audio.addEventListener("loadedmetadata", () => {
 
 // 곡이 끝났을 때 처리
 audio.addEventListener("ended", () => {
-  playIcon.src = "src/icon/play.svg";
-  playIcon.alt = "play";
+  setPlayState(false);
   cancelAnimationFrame(animationFrameId);
 });
 
@@ -113,7 +125,6 @@ const bgVideoInput = document.getElementById("bgVideoInput");
 document.addEventListener("dblclick", (e) => {
   // 텍스트, 입력창, 버튼 등 이벤트 버블링에 의한 예외 요소 무시
   if (["INPUT", "TEXTAREA", "BUTTON"].includes(e.target.tagName)) return;
-  // 부모 중 다이얼로그나 노래 리스트 등이 있다면 조건 추가 가능. 일단 기본적인 입력요소 방지
   bgVideoInput.click();
 });
 
@@ -134,21 +145,21 @@ bgVideoInput.addEventListener("change", (e) => {
 
 // 비디오와 오디오 동기화
 audio.addEventListener("play", () => {
-  if (bgVideo.src) bgVideo.play();
+  if (hasVideo()) bgVideo.play();
 });
 
 audio.addEventListener("pause", () => {
-  if (bgVideo.src) bgVideo.pause();
+  if (hasVideo()) bgVideo.pause();
 });
 
-// 드래그래서 구간 이동 등 시간이 튀었을 때 (seeking 기능 추가 대비)
+// 드래그해서 구간 이동 등 시간이 튀었을 때 (seeking 기능 추가 대비)
 audio.addEventListener("seeked", () => {
-  if (bgVideo.src) bgVideo.currentTime = audio.currentTime;
+  if (hasVideo()) bgVideo.currentTime = audio.currentTime;
 });
 
 // 진행중 약간씩 어긋나는 시간 주기적 동기화
 audio.addEventListener("timeupdate", () => {
-  if (bgVideo.src && Math.abs(bgVideo.currentTime - audio.currentTime) > 0.25) {
+  if (hasVideo() && Math.abs(bgVideo.currentTime - audio.currentTime) > SYNC_THRESHOLD) {
     bgVideo.currentTime = audio.currentTime;
   }
 });
@@ -162,6 +173,6 @@ window.addEventListener("keydown", (e) => {
   if (e.key === "Tab") {
     e.preventDefault(); // 기본 Focus 이동(선택) 방지
     isBlurred = !isBlurred;
-    bgVideo.style.filter = isBlurred ? "blur(26px)" : "blur(0px)";
+    bgVideo.style.filter = isBlurred ? `blur(${getComputedStyle(document.documentElement).getPropertyValue("--blur-amount").trim()})` : "blur(0px)";
   }
 });

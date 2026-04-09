@@ -1,0 +1,90 @@
+:root {
+  /* 색상 */
+  --shadow-color: rgba(0, 0, 0, 0.12);
+  --color-accent: #007bff;
+  --color-accent-dark: #0056b3;
+  --color-white: #ffffff;
+  --color-text-dark: #333333;
+
+  /* 트랜지션 */
+  --transition-fast: 0.2s;
+  --transition-base: 0.3s;
+  --transition-lyrics: 0.35s;
+
+  /* 배경 영상 */
+  --blur-amount: 26px;
+  --video-scale: 1.1;
+}
+
+body {
+  background-color: gray;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 클릭 후 잔상이 남는 현상 제거 */
+* {
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+
+.shadow {
+  filter: drop-shadow(0px 4px 12px var(--shadow-color));
+}
+
+/* 배경 영상 */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+  filter: blur(var(--blur-amount));
+  transform: scale(var(--video-scale));
+  transition: filter var(--transition-base) ease;
+}
+
+/* 배경 오버레이 */
+#bgOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* 파일 입력 숨김 */
+#bgVideoInput {
+  display: none;
+}
+
+/* 메인 레이아웃 */
+main {
+  width: 1600px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, calc(-50% + 20px));
+}
+
+#mainBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 140px;
+  margin-bottom: 20px;
+}
+
+#musicControl {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 36px 0;
+}

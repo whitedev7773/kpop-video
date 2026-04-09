@@ -16,6 +16,7 @@
     padding: 0;
     background-color: transparent;
     color: white;
+    user-select: none;
 }
 
 #progressBar > #currentTime {
@@ -38,7 +39,7 @@
     will-change: width;
     position: relative;
     display: block;
-    /* width: 60%; */ /* 이 부분은 스크립트로 제어 */
+    width: 0%; /* 스크립트로 제어 */
     height: 2px;
     border-radius: 2px;
     background-color: white;

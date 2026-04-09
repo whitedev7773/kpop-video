@@ -1,3 +1,7 @@
+#albumArt-musicInfo {
+    width: 450px;
+}
+
 #albumArtButton {
     margin: 0;
     padding: 0;
@@ -10,7 +14,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-color: #f0f0f0;
-    background-image: url(./init_art.png);
+    background-image: url(../assets/images/init_art.png);
 
     cursor: pointer;
 
