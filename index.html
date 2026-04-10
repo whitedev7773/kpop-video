@@ -17,17 +17,63 @@
     <link rel="stylesheet" href="./src/styles/lyrics.css" />
     <link rel="stylesheet" href="./src/styles/progress-bar.css" />
     <link rel="stylesheet" href="./src/styles/player-control.css" />
+    <link rel="stylesheet" href="./src/styles/tutorial.css" />
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="./src/scripts/album-art.js" defer></script>
     <script src="./src/scripts/lyrics.js" defer></script>
     <script src="./src/scripts/player-control.js" defer></script>
+    <script src="./src/scripts/tutorial.js" defer></script>
   </head>
   <body>
     <video id="bgVideo" muted playsinline></video>
     <div id="bgOverlay"></div>
     <input type="file" id="bgVideoInput" accept="video/*" />
     <div id="toast"></div>
+    <dialog id="tutorialDialog">
+      <button id="tutorialClose">✕</button>
+      <div id="tutorialSlider">
+        <div class="tutorial-slide" data-step="0">
+          <div class="tutorial-image"><img src="src/assets/tutorial/step1.png" alt="step1" /></div>
+          <h2>KPOP Video에 오신 걸 환영해요!</h2>
+          <p>좋아하는 음악에 가사와 앨범 아트를 더해<br>나만의 뮤직 비디오를 만들어 보세요.</p>
+        </div>
+        <div class="tutorial-slide" data-step="1">
+          <div class="tutorial-image"><img src="src/assets/tutorial/step2.png" alt="step2" /></div>
+          <h2>ZIP으로 한 번에 불러오기</h2>
+          <p>화면 어디서든 <b>우클릭</b> 후 <b>ZIP으로 불러오기</b>를 선택하면<br>음악·앨범 아트·가사를 한꺼번에 가져올 수 있어요.</p>
+        </div>
+        <div class="tutorial-slide" data-step="2">
+          <div class="tutorial-image"><img src="src/assets/tutorial/step3.png" alt="step3" /></div>
+          <h2>파일 개별 변경</h2>
+          <p>우클릭 메뉴에서 앨범 아트, 음악, 배경 영상을<br>각각 따로 교체할 수 있어요.</p>
+        </div>
+        <div class="tutorial-slide" data-step="3">
+          <div class="tutorial-image"><img src="src/assets/tutorial/step4.png" alt="step4" /></div>
+          <h2>가사 입력하기</h2>
+          <p>진행률 바의 파트 버튼을 누르면 가사 입력 창이 열려요.<br><code>[1절 - 1]</code> 형식으로 파트를 구분해 입력하세요.</p>
+        </div>
+        <div class="tutorial-slide" data-step="4">
+          <div class="tutorial-image"><img src="src/assets/tutorial/step5.png" alt="step5" /></div>
+          <h2>재생 컨트롤</h2>
+          <p>재생·일시정지, 구간 이동을 진행률 바로 조절하고<br>셔플·반복 모드도 자유롭게 설정해 보세요.</p>
+        </div>
+      </div>
+      <div id="tutorialFooter">
+        <div id="tutorialDots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div id="tutorialButtons">
+          <button id="tutorialPrev">이전</button>
+          <button id="tutorialNext">다음</button>
+          <button id="tutorialDone" style="display:none">닫기</button>
+        </div>
+      </div>
+    </dialog>
     <dialog id="loadingDialog">
       <div id="loadingSpinner"></div>
       <p id="loadingMessage">불러오는 중...</p>

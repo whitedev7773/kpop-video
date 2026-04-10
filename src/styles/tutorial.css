@@ -1,0 +1,238 @@
+/* 튜토리얼 다이얼로그 등장/퇴장 애니메이션 */
+@keyframes tutorialIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes tutorialOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+}
+
+/* 슬라이드 전환 */
+@keyframes slideInFromRight {
+    from { opacity: 0; transform: translateX(32px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInFromLeft {
+    from { opacity: 0; transform: translateX(-32px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+#tutorialDialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    width: 520px;
+    padding: 0;
+    background: rgba(22, 22, 26, 0.96);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 20px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-family: 'Pretendard Variable', sans-serif;
+    overflow: hidden;
+}
+
+#tutorialDialog[open] {
+    display: flex;
+    flex-direction: column;
+    animation: tutorialIn 0.22s cubic-bezier(0.2, 0, 0.13, 1) forwards;
+}
+
+#tutorialDialog.closing {
+    animation: tutorialOut 0.18s cubic-bezier(0.2, 0, 0.13, 1) forwards;
+}
+
+#tutorialDialog::backdrop {
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+}
+
+/* 닫기(X) 버튼 */
+#tutorialClose {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: none;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+    z-index: 1;
+}
+
+#tutorialClose:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* 슬라이드 영역 */
+#tutorialSlider {
+    position: relative;
+    overflow: hidden;
+}
+
+.tutorial-slide {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 40px 32px;
+    text-align: center;
+    animation: slideInFromRight 0.22s cubic-bezier(0.2, 0, 0.13, 1) forwards;
+}
+
+.tutorial-slide.active {
+    display: flex;
+}
+
+.tutorial-slide.from-left {
+    animation: slideInFromLeft 0.22s cubic-bezier(0.2, 0, 0.13, 1) forwards;
+}
+
+/* 이미지 영역 */
+.tutorial-image {
+    width: 100%;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tutorial-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 이미지 없을 때 빈 영역 표시 */
+.tutorial-image img[src$="/"] ,
+.tutorial-image img:not([src]) {
+    display: none;
+}
+
+.tutorial-slide h2 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+
+.tutorial-slide p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.tutorial-slide p b {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+
+.tutorial-slide p code {
+    font-family: monospace;
+    background: rgba(255, 255, 255, 0.10);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* 하단 푸터 */
+#tutorialFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* 단계 도트 */
+#tutorialDots {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.dot.active {
+    background: #fff;
+    transform: scale(1.25);
+}
+
+/* 버튼 그룹 */
+#tutorialButtons {
+    display: flex;
+    gap: 8px;
+}
+
+#tutorialPrev,
+#tutorialNext,
+#tutorialDone {
+    padding: 9px 20px;
+    border-radius: 10px;
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, opacity 0.15s;
+}
+
+#tutorialPrev {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#tutorialPrev:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+}
+
+#tutorialPrev:disabled {
+    opacity: 0.25;
+    cursor: default;
+}
+
+#tutorialNext,
+#tutorialDone {
+    background: #fff;
+    color: #111;
+}
+
+#tutorialNext:hover,
+#tutorialDone:hover {
+    background: rgba(255, 255, 255, 0.88);
+}
