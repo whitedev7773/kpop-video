@@ -71,6 +71,7 @@ window.applyMusic = applyMusic;
 musicInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (file) {
+    window.showLoading('음악 파일 불러오는 중...');
     applyMusic(file);
     document.getElementById("musicTitle").value = file.name.replace(
       /\.[^/.]+$/,
@@ -108,9 +109,10 @@ prevBtn.addEventListener("click", () => {
   }
 });
 
-// 메타데이터가 로드되면 총 시간 표시
+// 메타데이터가 로드되면 총 시간 표시 및 로딩 종료
 audio.addEventListener("loadedmetadata", () => {
   endTimeText.value = formatTime(audio.duration);
+  window.hideLoading?.();
 });
 
 // 곡이 끝났을 때 처리
@@ -144,7 +146,15 @@ window.applyVideo = applyVideo;
 
 bgVideoInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
-  if (file) applyVideo(file);
+  if (file) {
+    window.showLoading('배경 영상 불러오는 중...');
+    applyVideo(file);
+    window.showToast?.('뒷배경 영상은 적용에 시간이 걸릴 수 있습니다.');
+  }
+});
+
+bgVideo.addEventListener("loadedmetadata", () => {
+  window.hideLoading?.();
 });
 
 // 비디오와 오디오 동기화
