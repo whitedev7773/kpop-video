@@ -6,7 +6,10 @@
     <title>Document</title>
     <!-- Fonts -->
     <link rel="stylesheet" href="./src/assets/fonts/a2z/a2z.css" />
-    <link rel="stylesheet" href="./src/assets/fonts/pretendardvariable/pretendardvariable.css" />
+    <link
+      rel="stylesheet"
+      href="./src/assets/fonts/pretendardvariable/pretendardvariable.css"
+    />
     <!-- Styles -->
     <link rel="stylesheet" href="./src/styles/global.css" />
     <link rel="stylesheet" href="./src/styles/album-art.css" />
@@ -26,10 +29,9 @@
     <input type="file" id="bgVideoInput" accept="video/*" />
     <dialog id="lyricsSetting">
       <h1>가사 입력</h1>
-      <p id="lyricsHint">시간 자동 싱크: <code>[mm:ss]</code> 또는 <code>[mm:ss.00]</code> 형식으로 입력<br>시간 없이 입력하면 수동(↑↓) 모드</p>
       <textarea
         id="lyricsInput"
-        placeholder="[00:05.15] 첫 번째 가사&#10;[00:10.30] 두 번째 가사&#10;또는 시간 없이 가사만 입력"
+        placeholder="[1절 - 1] 첫 번째 가사&#10;두 번째 가사&#10;[1절 - 2] 세 번째 가사"
         rows="10"
       ></textarea>
       <form method="dialog">
@@ -43,7 +45,12 @@
         <!-- 앨범아트 + 곡 정보 -->
         <div id="albumArt-musicInfo" class="shadow">
           <input type="file" id="albumArtInput" accept="image/*" />
-          <input type="file" id="zipInput" accept=".zip" style="display:none" />
+          <input
+            type="file"
+            id="zipInput"
+            accept=".zip"
+            style="display: none"
+          />
           <button id="albumArtButton"></button>
           <div id="musicArtistTextBox">
             <input type="text" id="musicTitle" value="Music Name" />
@@ -92,7 +99,12 @@
           <input type="text" id="currentTime" value="00:00" readonly />
           <div id="body">
             <span id="fill">
-              <span id="thumb"></span>
+              <span id="thumb">
+                <!-- 파트 표시 요소 -->
+                <span id="partIndicator-triangle">
+                  <span id="partIndicator">1절 - 1</span>
+                </span>
+              </span>
             </span>
           </div>
           <input type="text" id="endTime" value="00:00" readonly />
