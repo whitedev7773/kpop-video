@@ -87,7 +87,7 @@ zipInput.addEventListener('change', async function() {
 
     const zip = await JSZip.loadAsync(file);
 
-    const artFile = zip.file('art.png');
+    const artFile = zip.file('art.png') ?? zip.file('art.jpg');
     if (artFile) {
         const blob = await artFile.async('blob');
         const url = URL.createObjectURL(blob);
