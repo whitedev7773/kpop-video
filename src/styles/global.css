@@ -29,6 +29,8 @@ body {
   outline: none;
   border: none;
   user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 input, textarea {
