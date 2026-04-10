@@ -1,6 +1,6 @@
 const TOTAL_STEPS = 3;
 
-const dialog   = document.getElementById('tutorialDialog');
+const tutorialDialog = document.getElementById('tutorialDialog');
 const slides   = Array.from(document.querySelectorAll('.tutorial-slide'));
 const dots     = Array.from(document.querySelectorAll('#tutorialDots .dot'));
 const btnClose = document.getElementById('tutorialClose');
@@ -33,10 +33,10 @@ function goToStep(next, direction = 'right') {
 }
 
 function closeTutorial() {
-    dialog.classList.add('closing');
-    dialog.addEventListener('animationend', () => {
-        dialog.classList.remove('closing');
-        dialog.close();
+    tutorialDialog.classList.add('closing');
+    tutorialDialog.addEventListener('animationend', () => {
+        tutorialDialog.classList.remove('closing');
+        tutorialDialog.close();
     }, { once: true });
 }
 
@@ -54,4 +54,4 @@ btnPrev.addEventListener('click', () => {
 // 접속 시 항상 표시
 slides[0].classList.add('active');
 btnPrev.disabled = true;
-dialog.showModal();
+tutorialDialog.showModal();
