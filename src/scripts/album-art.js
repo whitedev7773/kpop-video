@@ -51,7 +51,12 @@ contextMenu.innerHTML = `
 document.body.appendChild(contextMenu);
 
 function hideMenu() {
-    contextMenu.style.display = 'none';
+    if (!contextMenu.classList.contains('visible')) return;
+    contextMenu.classList.remove('visible');
+    contextMenu.classList.add('hiding');
+    contextMenu.addEventListener('animationend', () => {
+        contextMenu.classList.remove('hiding');
+    }, { once: true });
 }
 
 // 전역 우클릭 시 커스텀 메뉴 표시 (텍스트 입력 요소는 브라우저 기본 메뉴 유지)
@@ -59,7 +64,10 @@ document.addEventListener('contextmenu', (e) => {
     if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
     e.preventDefault();
 
-    contextMenu.style.display = 'block';
+    contextMenu.classList.remove('visible');
+    // reflow를 강제해 같은 위치에서 다시 우클릭해도 애니메이션 재생
+    void contextMenu.offsetWidth;
+    contextMenu.classList.add('visible');
 
     // 화면 밖으로 나가지 않도록 위치 보정
     const menuW = contextMenu.offsetWidth;

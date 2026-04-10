@@ -31,6 +31,28 @@
 }
 
 /* 우클릭 컨텍스트 메뉴 */
+@keyframes contextMenuIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes contextMenuOut {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.92) translateY(-6px);
+    }
+}
+
 #albumArtMenu {
     display: none;
     position: fixed;
@@ -45,6 +67,17 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     min-width: 160px;
     user-select: none;
+    transform-origin: top left;
+}
+
+#albumArtMenu.visible {
+    display: block;
+    animation: contextMenuIn 0.15s cubic-bezier(0.2, 0, 0.13, 1) forwards;
+}
+
+#albumArtMenu.hiding {
+    display: block;
+    animation: contextMenuOut 0.12s cubic-bezier(0.2, 0, 0.13, 1) forwards;
 }
 
 #albumArtMenu li {
