@@ -58,7 +58,7 @@
 
 #partIndicator-triangle {
     position: absolute;
-    bottom: calc(100% + 10px);
+    bottom: calc(100% + 16px);
     left: 50%;
     transform: translateX(-50%) translateY(6px);
     opacity: 0;
@@ -78,15 +78,15 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border: 5px solid transparent;
+    border: 8px solid transparent;
     border-top-color: white;
 }
 
 #partIndicator {
     background: white;
     color: #1a1a1a;
-    padding: 4px 10px;
-    border-radius: 8px;
+    padding: 4px 6px;
+    border-radius: 6px;
     font-family: 'Pretendard Variable', sans-serif;
     font-size: 13px;
     font-weight: 500;
