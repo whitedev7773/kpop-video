@@ -1,4 +1,4 @@
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 3;
 
 const dialog   = document.getElementById('tutorialDialog');
 const slides   = Array.from(document.querySelectorAll('.tutorial-slide'));
