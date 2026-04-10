@@ -8,7 +8,7 @@
 
   /* 트랜지션 */
   --transition-fast: 0.2s;
-  --transition-base: 0.3s;
+  --transition-base: 1s;
   --transition-lyrics: 0.46s;
 
   /* 배경 영상 */
