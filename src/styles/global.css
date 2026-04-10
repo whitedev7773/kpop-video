@@ -14,6 +14,28 @@
   /* 배경 영상 */
   --blur-amount: 26px;
   --video-scale: 1.1;
+
+  /* 다이얼로그 공통 */
+  --dialog-bg: rgba(22, 22, 26, 0.96);
+  --dialog-blur: blur(20px);
+  --dialog-border: 1px solid rgba(255, 255, 255, 0.10);
+  --dialog-radius: 20px;
+  --dialog-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  --dialog-backdrop-bg: rgba(0, 0, 0, 0.55);
+  --dialog-backdrop-blur: blur(3px);
+
+  /* 타이포그래피 */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.65);
+  --color-text-muted: rgba(255, 255, 255, 0.45);
+
+  /* 구분선/서피스 */
+  --color-border-subtle: rgba(255, 255, 255, 0.07);
+  --color-surface-hover: rgba(255, 255, 255, 0.08);
+
+  /* 버튼 */
+  --btn-radius: 10px;
+  --btn-transition: background 0.15s, color 0.15s, opacity 0.15s;
 }
 
 body {
@@ -99,9 +121,9 @@ main {
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%) translateY(16px);
-  background: rgba(20, 20, 20, 0.92);
-  backdrop-filter: blur(12px);
-  color: var(--color-white);
+  background: var(--dialog-bg);
+  backdrop-filter: var(--dialog-blur);
+  color: var(--color-text-primary);
   font-family: 'Pretendard Variable', sans-serif;
   font-size: 14px;
   padding: 12px 24px;
@@ -121,16 +143,16 @@ main {
 
 /* 로딩 다이얼로그 */
 #loadingDialog {
-  border: none;
-  border-radius: 16px;
-  background: rgba(20, 20, 20, 0.92);
-  backdrop-filter: blur(12px);
+  border: var(--dialog-border);
+  border-radius: var(--dialog-radius);
+  background: var(--dialog-bg);
+  backdrop-filter: var(--dialog-blur);
   padding: 40px 56px;
-  color: var(--color-white);
+  color: var(--color-text-primary);
   font-family: 'Pretendard Variable', sans-serif;
   font-size: 15px;
   letter-spacing: 0.02em;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--dialog-shadow);
 }
 
 #loadingDialog[open] {
@@ -141,8 +163,8 @@ main {
 }
 
 #loadingDialog::backdrop {
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(2px);
+  background: var(--dialog-backdrop-bg);
+  backdrop-filter: var(--dialog-backdrop-blur);
 }
 
 #loadingSpinner {
