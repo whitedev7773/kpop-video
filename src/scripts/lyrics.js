@@ -111,10 +111,8 @@ window.addEventListener("resetLyrics", () => {
   updateLyricsClasses();
 });
 
-saveLyricsBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-
-  const lines = lyricsInput.value.split("\n");
+function applyLyrics(text) {
+  const lines = text.split("\n");
   const parsed = lines.map(parseLyricLine);
 
   // 하나라도 timestamp가 있으면 timed 모드
@@ -156,6 +154,12 @@ saveLyricsBtn.addEventListener("click", (e) => {
   refreshLyricsCache();
   currentLyricIndex = 2;
   updateLyricsClasses();
+}
 
+window.applyLyrics = applyLyrics;
+
+saveLyricsBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  applyLyrics(lyricsInput.value);
   dialog.close();
 });

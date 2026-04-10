@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="./src/styles/progress-bar.css" />
     <link rel="stylesheet" href="./src/styles/player-control.css" />
     <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="./src/scripts/album-art.js" defer></script>
     <script src="./src/scripts/lyrics.js" defer></script>
     <script src="./src/scripts/player-control.js" defer></script>
@@ -42,6 +43,7 @@
         <!-- 앨범아트 + 곡 정보 -->
         <div id="albumArt-musicInfo" class="shadow">
           <input type="file" id="albumArtInput" accept="image/*" />
+          <input type="file" id="zipInput" accept=".zip" style="display:none" />
           <button id="albumArtButton"></button>
           <div id="musicArtistTextBox">
             <input type="text" id="musicTitle" value="Music Name" />

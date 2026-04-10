@@ -55,26 +55,27 @@ function updateProgress() {
 // 1. Next 버튼: 파일 선택만 하고 재생은 하지 않음
 nextBtn.addEventListener("click", () => musicInput.click());
 
+function applyMusic(blob) {
+  const url = URL.createObjectURL(blob);
+  audio.pause();
+  audio.src = url;
+  audio.load();
+  setPlayState(false);
+  progressBarFill.style.width = "0%";
+  currentTimeText.value = "00:00";
+  cancelAnimationFrame(animationFrameId);
+}
+
+window.applyMusic = applyMusic;
+
 musicInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (file) {
-    const url = URL.createObjectURL(file);
-
-    // 오디오 초기화 (재생하지 않음)
-    audio.pause();
-    audio.src = url;
-    audio.load(); // 메타데이터 로드 강제
-
-    // UI 초기화
-    setPlayState(false);
-    progressBarFill.style.width = "0%";
-    currentTimeText.value = "00:00";
+    applyMusic(file);
     document.getElementById("musicTitle").value = file.name.replace(
       /\.[^/.]+$/,
       "",
     );
-
-    cancelAnimationFrame(animationFrameId);
   }
 });
 
@@ -122,26 +123,28 @@ audio.addEventListener("ended", () => {
 const bgVideo = document.getElementById("bgVideo");
 const bgVideoInput = document.getElementById("bgVideoInput");
 
-// 배경 (빈 공간) 더블 클릭 시 영상 선택 창 열기
+window.openMusicInput = () => musicInput.click();
+window.openVideoInput = () => bgVideoInput.click();
+
+// 배경 (빈 공간) 더블클릭 시 영상 선택 창 열기
 document.addEventListener("dblclick", (e) => {
-  // 텍스트, 입력창, 버튼 등 이벤트 버블링에 의한 예외 요소 무시
   if (["INPUT", "TEXTAREA", "BUTTON"].includes(e.target.tagName)) return;
   bgVideoInput.click();
 });
 
+function applyVideo(blob) {
+  const url = URL.createObjectURL(blob);
+  bgVideo.src = url;
+  bgVideo.load();
+  if (!audio.paused) bgVideo.play();
+  bgVideo.currentTime = audio.currentTime;
+}
+
+window.applyVideo = applyVideo;
+
 bgVideoInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
-  if (file) {
-    const url = URL.createObjectURL(file);
-    bgVideo.src = url;
-    bgVideo.load();
-
-    // 현재 오디오의 재생 상태에 맞춰 바로 재생할지 여부 결정
-    if (!audio.paused) {
-      bgVideo.play();
-    }
-    bgVideo.currentTime = audio.currentTime;
-  }
+  if (file) applyVideo(file);
 });
 
 // 비디오와 오디오 동기화
