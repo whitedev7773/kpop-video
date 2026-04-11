@@ -6,6 +6,24 @@ const ICON = {
 const SYNC_THRESHOLD = 0.25; // 초 단위 허용 오차
 
 const audio = new Audio();
+
+// Web Audio API - 스펙트럼 시각화용
+let _audioCtx, _spectrumAnalyser;
+function initAudioContext() {
+  if (_audioCtx) {
+    _audioCtx.resume();
+    return;
+  }
+  _audioCtx = new AudioContext();
+  _spectrumAnalyser = _audioCtx.createAnalyser();
+  _spectrumAnalyser.fftSize = 2048;
+  _spectrumAnalyser.smoothingTimeConstant = 0.8;
+  const source = _audioCtx.createMediaElementSource(audio);
+  source.connect(_spectrumAnalyser);
+  _spectrumAnalyser.connect(_audioCtx.destination);
+  window.spectrumAnalyser = _spectrumAnalyser;
+}
+
 const musicInput = document.createElement("input");
 musicInput.type = "file";
 musicInput.accept = "audio/*";
@@ -88,6 +106,7 @@ playBtn.addEventListener("click", () => {
   }
 
   if (audio.paused) {
+    initAudioContext();
     audio.play();
     setPlayState(true);
     animationFrameId = requestAnimationFrame(updateProgress);
