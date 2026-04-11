@@ -85,7 +85,9 @@
   padding: 8px 0;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   font-size: 14px;
   font-weight: 500;
   color: var(--color-text-secondary);
@@ -137,7 +139,7 @@
 #saveLyricsBtn {
   padding: 9px 20px;
   border-radius: var(--btn-radius);
-  font-family: 'Pretendard Variable', sans-serif;
+  font-family: "Pretendard Variable", sans-serif;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -170,6 +172,7 @@
   width: 100%;
   height: 480px;
   transform: translateY(-10px);
+  margin-right: 100px;
 
   /* 모드별 간격 변수 (기본값: 한국어) */
   --lyrics-offset-1: 108px;
@@ -210,7 +213,8 @@
   color: var(--color-white);
   white-space: nowrap;
   text-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
-  transition: font-size var(--transition-lyrics) cubic-bezier(0.35, 0.06, 0.16, 1);
+  transition: font-size var(--transition-lyrics)
+    cubic-bezier(0.35, 0.06, 0.16, 1);
 }
 
 #lyricsBox > .lyric-line.focus p {
@@ -280,12 +284,23 @@
 
 /* ═══════════════════════════════════════════════════════
    영어 모드 (English) — 한국어 + 영어, 가운데 정렬
+   3개의 덩어리만 표시 (1 위 + 포커스 + 1 아래)
    ═══════════════════════════════════════════════════════ */
+
+#lyricsBox[data-mode="english"]
+  > .lyric-line.post-focus:nth-child(1 of .post-focus) {
+  opacity: 0;
+}
+
+#lyricsBox[data-mode="english"]
+  > .lyric-line.pre-focus:nth-child(2 of .pre-focus) {
+  opacity: 0;
+}
 
 #lyricsBox[data-mode="english"] > .lyric-line {
   align-items: center;
   text-align: center;
-  gap: 8px;
+  gap: 12.8px;
 }
 
 #lyricsBox[data-mode="english"] > .lyric-line.focus {
@@ -303,12 +318,8 @@
 
 #lyricsBox[data-mode="english"] .lyric-sub {
   font-weight: 400;
-  font-size: 24px;
-  opacity: 0.5;
-}
-
-#lyricsBox[data-mode="english"] > .lyric-line.focus .lyric-sub {
   font-size: 30px;
+  opacity: 0.5;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -316,11 +327,13 @@
    3개의 덩어리만 표시 (1 위 + 포커스 + 1 아래)
    ═══════════════════════════════════════════════════════ */
 
-#lyricsBox[data-mode="japanese"] > .lyric-line.post-focus:nth-child(1 of .post-focus) {
+#lyricsBox[data-mode="japanese"]
+  > .lyric-line.post-focus:nth-child(1 of .post-focus) {
   opacity: 0;
 }
 
-#lyricsBox[data-mode="japanese"] > .lyric-line.pre-focus:nth-child(2 of .pre-focus) {
+#lyricsBox[data-mode="japanese"]
+  > .lyric-line.pre-focus:nth-child(2 of .pre-focus) {
   opacity: 0;
 }
 
