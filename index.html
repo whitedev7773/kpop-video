@@ -88,6 +88,20 @@
     </dialog>
     <dialog id="lyricsSetting">
       <h1>가사 입력</h1>
+      <div id="lyricsModeSelector">
+        <label class="mode-option active" data-mode="korean">
+          <input type="radio" name="lyricsMode" value="korean" checked />
+          <span>한국어</span>
+        </label>
+        <label class="mode-option" data-mode="english">
+          <input type="radio" name="lyricsMode" value="english" />
+          <span>영어</span>
+        </label>
+        <label class="mode-option" data-mode="japanese">
+          <input type="radio" name="lyricsMode" value="japanese" />
+          <span>일본어</span>
+        </label>
+      </div>
       <textarea
         id="lyricsInput"
         placeholder="[1절 - 1] 첫 번째 가사&#10;두 번째 가사&#10;[1절 - 2] 세 번째 가사"
@@ -116,19 +130,19 @@
             <input type="text" id="artistName" value="Artist Name" />
           </div>
         </div>
-        <div id="lyricsBox" class="shadow">
-          <p class="lyric-line post-focus"></p>
-          <p class="lyric-line post-focus"></p>
-          <p class="lyric-line focus"></p>
-          <p class="lyric-line pre-focus">가사1</p>
-          <p class="lyric-line pre-focus">가사2</p>
-          <p class="lyric-line pre">가사3</p>
-          <p class="lyric-line pre">가사4</p>
-          <p class="lyric-line pre">가사5</p>
-          <p class="lyric-line pre">가사6</p>
-          <p class="lyric-line pre">가사7</p>
-          <p class="lyric-line pre">가사8</p>
-          <p class="lyric-line pre">가사9</p>
+        <div id="lyricsBox" class="shadow" data-mode="korean">
+          <div class="lyric-line post-focus"><p class="lyric-main">&nbsp;</p></div>
+          <div class="lyric-line post-focus"><p class="lyric-main">&nbsp;</p></div>
+          <div class="lyric-line focus"><p class="lyric-main">&nbsp;</p></div>
+          <div class="lyric-line pre-focus"><p class="lyric-main">가사1</p></div>
+          <div class="lyric-line pre-focus"><p class="lyric-main">가사2</p></div>
+          <div class="lyric-line pre"><p class="lyric-main">가사3</p></div>
+          <div class="lyric-line pre"><p class="lyric-main">가사4</p></div>
+          <div class="lyric-line pre"><p class="lyric-main">가사5</p></div>
+          <div class="lyric-line pre"><p class="lyric-main">가사6</p></div>
+          <div class="lyric-line pre"><p class="lyric-main">가사7</p></div>
+          <div class="lyric-line pre"><p class="lyric-main">가사8</p></div>
+          <div class="lyric-line pre"><p class="lyric-main">가사9</p></div>
         </div>
       </section>
       <!-- 음악 제어 파트 -->

@@ -66,6 +66,48 @@
   color: var(--color-text-primary);
 }
 
+/* ─── 가사 모드 셀렉터 ──────────────────────────────── */
+
+#lyricsModeSelector {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+#lyricsModeSelector .mode-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+#lyricsModeSelector .mode-option input[type="radio"] {
+  display: none;
+}
+
+#lyricsModeSelector .mode-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-primary);
+}
+
+#lyricsModeSelector .mode-option.active {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+/* ─── 가사 입력 ──────────────────────────────────────── */
+
 #lyricsInput {
   width: 100%;
   margin-bottom: 20px;
@@ -128,62 +170,196 @@
   width: 100%;
   height: 480px;
   transform: translateY(-10px);
+
+  /* 모드별 간격 변수 (기본값: 한국어) */
+  --lyrics-offset-1: 108px;
+  --lyrics-offset-2: 210px;
+  --lyrics-offset-3: 312px;
 }
+
+#lyricsBox[data-mode="english"] {
+  --lyrics-offset-1: 180px;
+  --lyrics-offset-2: 355px;
+  --lyrics-offset-3: 530px;
+}
+
+#lyricsBox[data-mode="japanese"] {
+  --lyrics-offset-1: 225px;
+  --lyrics-offset-2: 425px;
+  --lyrics-offset-3: 625px;
+}
+
+/* ─── 가사 요소 (컨테이너) ────────────────────────────── */
 
 #lyricsBox > .lyric-line {
   position: absolute;
   transition: all var(--transition-lyrics) cubic-bezier(0.35, 0.06, 0.16, 1);
   margin: 0;
   padding: 0;
-  text-align: left;
-  font-family: "A2Z", sans-serif;
-  font-weight: 700;
-  font-size: 47.6px;
-  color: var(--color-white);
   width: 100%;
   top: 50%;
   left: 50%;
+  display: flex;
+  flex-direction: column;
 }
+
+#lyricsBox > .lyric-line p {
+  margin: 0;
+  padding: 0;
+  font-family: "A2Z", sans-serif;
+  color: var(--color-white);
+  white-space: nowrap;
+  text-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+  transition: font-size var(--transition-lyrics) cubic-bezier(0.35, 0.06, 0.16, 1);
+}
+
+#lyricsBox > .lyric-line.focus p {
+  text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── 위치 (모든 모드 공통) ────────────────────────────── */
 
 #lyricsBox > .lyric-line.post {
   opacity: 0;
-  transform: translate(-50%, calc(-50% - 312px));
+  transform: translate(-50%, calc(-50% - var(--lyrics-offset-3)));
   transition-delay: 0s;
 }
 
 #lyricsBox > .lyric-line.post-focus:nth-child(1 of .post-focus) {
   opacity: 0.3;
-  transform: translate(-50%, calc(-50% - 210px));
+  transform: translate(-50%, calc(-50% - var(--lyrics-offset-2)));
   transition-delay: 0.02s;
 }
 
 #lyricsBox > .lyric-line.post-focus:nth-child(2 of .post-focus) {
   opacity: 0.5;
-  transform: translate(-50%, calc(-50% - 108px));
+  transform: translate(-50%, calc(-50% - var(--lyrics-offset-1)));
   transition-delay: 0.04s;
 }
 
 #lyricsBox > .lyric-line.focus {
   opacity: 1;
-  font-size: 56px;
   transform: translate(-50%, -50%);
   transition-delay: 0.06s;
 }
 
 #lyricsBox > .lyric-line.pre-focus:nth-child(1 of .pre-focus) {
   opacity: 0.5;
-  transform: translate(-50%, calc(-50% + 108px));
+  transform: translate(-50%, calc(-50% + var(--lyrics-offset-1)));
   transition-delay: 0.08s;
 }
 
 #lyricsBox > .lyric-line.pre-focus:nth-child(2 of .pre-focus) {
   opacity: 0.3;
-  transform: translate(-50%, calc(-50% + 210px));
+  transform: translate(-50%, calc(-50% + var(--lyrics-offset-2)));
   transition-delay: 0.1s;
 }
 
 #lyricsBox > .lyric-line.pre {
   opacity: 0;
-  transform: translate(-50%, calc(-50% + 312px));
+  transform: translate(-50%, calc(-50% + var(--lyrics-offset-3)));
   transition-delay: 0.12s;
+}
+
+/* ═══════════════════════════════════════════════════════
+   한국어 모드 (Korean) — 한 줄, 좌측 정렬
+   ═══════════════════════════════════════════════════════ */
+
+#lyricsBox[data-mode="korean"] > .lyric-line {
+  text-align: left;
+}
+
+#lyricsBox[data-mode="korean"] .lyric-main {
+  font-weight: 700;
+  font-size: 47.6px;
+}
+
+#lyricsBox[data-mode="korean"] > .lyric-line.focus .lyric-main {
+  font-size: 56px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   영어 모드 (English) — 한국어 + 영어, 가운데 정렬
+   ═══════════════════════════════════════════════════════ */
+
+#lyricsBox[data-mode="english"] > .lyric-line {
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+#lyricsBox[data-mode="english"] > .lyric-line.focus {
+  gap: 16px;
+}
+
+#lyricsBox[data-mode="english"] .lyric-main {
+  font-weight: 700;
+  font-size: 44.8px;
+}
+
+#lyricsBox[data-mode="english"] > .lyric-line.focus .lyric-main {
+  font-size: 56px;
+}
+
+#lyricsBox[data-mode="english"] .lyric-sub {
+  font-weight: 400;
+  font-size: 24px;
+  opacity: 0.5;
+}
+
+#lyricsBox[data-mode="english"] > .lyric-line.focus .lyric-sub {
+  font-size: 30px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   일본어 모드 (Japanese) — 일본어 + 발음 + 한국어, 가운데 정렬
+   3개의 덩어리만 표시 (1 위 + 포커스 + 1 아래)
+   ═══════════════════════════════════════════════════════ */
+
+#lyricsBox[data-mode="japanese"] > .lyric-line.post-focus:nth-child(1 of .post-focus) {
+  opacity: 0;
+}
+
+#lyricsBox[data-mode="japanese"] > .lyric-line.pre-focus:nth-child(2 of .pre-focus) {
+  opacity: 0;
+}
+
+#lyricsBox[data-mode="japanese"] > .lyric-line {
+  align-items: center;
+  text-align: center;
+  gap: 9px;
+}
+
+#lyricsBox[data-mode="japanese"] > .lyric-line.focus {
+  gap: 12px;
+}
+
+/* 일본어 (상단) */
+#lyricsBox[data-mode="japanese"] .lyric-top {
+  font-weight: 400;
+  font-size: 34.5px;
+}
+
+#lyricsBox[data-mode="japanese"] > .lyric-line.focus .lyric-top {
+  font-size: 46px;
+}
+
+/* 발음 (중앙) */
+#lyricsBox[data-mode="japanese"] .lyric-mid {
+  font-weight: 700;
+  font-size: 34.5px;
+}
+
+#lyricsBox[data-mode="japanese"] > .lyric-line.focus .lyric-mid {
+  font-size: 46px;
+}
+
+/* 한국어 (하단) */
+#lyricsBox[data-mode="japanese"] .lyric-bottom {
+  font-weight: 700;
+  font-size: 34.5px;
+}
+
+#lyricsBox[data-mode="japanese"] > .lyric-line.focus .lyric-bottom {
+  font-size: 46px;
 }

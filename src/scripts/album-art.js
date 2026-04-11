@@ -165,7 +165,10 @@ zipInput.addEventListener('change', async function() {
             {
                 file: zip.file('lyrics.txt'),
                 label: '가사 적용 중...',
-                handle: async (text) => window.applyLyrics(text),
+                handle: async (text) => {
+                    const mode = window.detectLyricsMode(text);
+                    window.applyLyrics(text, mode);
+                },
                 type: 'string',
             },
         ].filter(s => s.file);
