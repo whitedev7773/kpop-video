@@ -1,94 +1,96 @@
 #progressBar {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 14px
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
 }
 
 #progressBar > input[type="text"] {
-    width: 60px;
-    font-family: 'A2Z', sans-serif;
-    font-weight: 200;
-    font-size: 20px;
-    margin: 0;
-    padding: 0;
-    background-color: transparent;
-    color: white;
-    user-select: none;
+  width: 60px;
+  font-family: "A2Z", sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  color: white;
+  user-select: none;
 }
 
 #progressBar > #currentTime {
-    text-align: right;
+  text-align: right;
 }
 
 #progressBar > #endTime {
-    text-align: left;
+  text-align: left;
 }
 
 #progressBar > #body {
-    width: 100%;
-    height: 2px;
-    border-radius: 2px;
-    background-color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 #progressBar > #body > #fill {
-    transition: width 0.1s linear;
-    will-change: width;
-    position: relative;
-    display: block;
-    width: 0%; /* 스크립트로 제어 */
-    height: 2px;
-    border-radius: 2px;
-    background-color: white;
+  transition: width 0.1s linear;
+  will-change: width;
+  position: relative;
+  display: block;
+  width: 0%; /* 스크립트로 제어 */
+  height: 2px;
+  border-radius: 2px;
+  background-color: white;
 }
 
 #progressBar > #body > #fill > #thumb {
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    display: block;
-    width: 6px;
-    height: 6px;
-    border-radius: 6px;
-    background-color: white;
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 6px;
+  background-color: white;
 }
 
 #partIndicator-triangle {
-    position: absolute;
-    bottom: calc(100% + 16px);
-    left: 50%;
-    transform: translateX(-50%) translateY(6px);
-    opacity: 0;
-    pointer-events: none;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
-    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 #partIndicator-triangle.visible {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 #partIndicator-triangle::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 8px solid transparent;
-    border-top-color: white;
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: white;
 }
 
 #partIndicator {
-    background: white;
-    color: #1a1a1a;
-    padding: 4px 6px;
-    border-radius: 6px;
-    font-family: 'Pretendard Variable', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    white-space: nowrap;
+  background: white;
+  color: #1a1a1a;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
 }

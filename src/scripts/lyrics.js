@@ -83,6 +83,11 @@ function parseLyricsText(text, mode) {
         group[0] = firstText;
       }
 
+      // "."만 있는 줄은 공백 처리
+      for (let i = 0; i < group.length; i++) {
+        if (group[i] === ".") group[i] = "\u00A0";
+      }
+
       // 그룹 크기를 맞춤
       while (group.length < linesPerGroup) group.push("\u00A0");
 
@@ -108,10 +113,10 @@ function lyricsDataToText(data, mode) {
   return data
     .map((d) => {
       let firstLine = d.part ? `[${d.part}] ` : "";
-      firstLine += d.lines[0] === "\u00A0" ? "" : d.lines[0];
+      firstLine += d.lines[0] === "\u00A0" ? "." : d.lines[0];
       const otherLines = d.lines
         .slice(1)
-        .map((l) => (l === "\u00A0" ? "" : l));
+        .map((l) => (l === "\u00A0" ? "." : l));
       return [firstLine, ...otherLines].join("\n");
     })
     .join("\n\n");
