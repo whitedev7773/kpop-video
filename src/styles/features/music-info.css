@@ -1,3 +1,7 @@
+/**
+ * 음악 정보 (제목, 아티스트) 스타일
+ */
+
 #musicArtistTextBox {
   margin-top: 16px;
   padding: 20px 0;
@@ -9,8 +13,8 @@
   font-family: "A2Z", sans-serif;
   text-align: center;
   margin: 0;
-  padding: 0 0 5px 0; /* 하단 여백을 주어 글자 잘림 방지 */
-  line-height: 1.4; /* 줄 간격 확보 */
+  padding: 0 0 5px 0;
+  line-height: 1.4;
   background-color: transparent;
   color: white;
 }

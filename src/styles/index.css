@@ -1,0 +1,38 @@
+/**
+ * 메인 CSS 진입점
+ * 모든 CSS 파일을 통합적으로 로드
+ */
+
+/* 기초 스타일 */
+@import url("./base/reset.css");
+@import url("./base/variables.css");
+@import url("./base/typography.css");
+@import url("./base/animations.css");
+
+/* 재사용 컴포넌트 */
+@import url("./components/button.css");
+@import url("./components/dialog.css");
+@import url("./components/menu.css");
+@import url("./components/toast.css");
+@import url("./components/input-fields.css");
+@import url("./components/slider.css");
+@import url("./components/loading.css");
+
+/* 레이아웃 */
+@import url("./layouts/background.css");
+@import url("./layouts/grid.css");
+@import url("./layouts/typeA.css");
+@import url("./layouts/typeB.css");
+
+/* 기능별 스타일 */
+@import url("./features/player-control.css");
+@import url("./features/music-info.css");
+@import url("./features/album-art.css");
+@import url("./features/lyrics.css");
+@import url("./features/progress-bar.css");
+@import url("./features/tutorial.css");
+
+/* 테마 */
+@import url("./themes/dark.css");
+@import url("./themes/light.css");
+@import url("./themes/mixed.css");

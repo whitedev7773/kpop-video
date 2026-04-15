@@ -1,0 +1,30 @@
+/**
+ * 토스트 알림 스타일
+ */
+
+#toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--dialog-bg);
+  backdrop-filter: var(--dialog-blur);
+  color: var(--color-text-primary);
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  white-space: nowrap;
+  z-index: 9999;
+}
+
+#toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

@@ -1,0 +1,25 @@
+/**
+ * Mixed 테마 변수 및 스타일
+ * TypeB layout에서 data-typeb-theme="mixed-light" 또는 "mixed-dark" 사용
+ */
+
+/* Mixed Light: 밝은 가사 + 어두운 플레이어 바 */
+body[data-typeb-theme="mixed-light"] {
+  --lyrics-bg-primary: rgba(255, 255, 255, 0.08);
+  --lyrics-bg-secondary: rgba(255, 255, 255, 0.18);
+  --lyrics-text-primary: #ffffff;
+  --player-bg: rgba(0, 0, 0, 0.75);
+  --player-text-primary: rgba(255, 255, 255, 0.95);
+  --player-text-secondary: rgba(255, 255, 255, 0.6);
+}
+
+/* Mixed Dark: 어두운 가사 + 밝은 플레이어 바 (기본값) */
+body[data-typeb-theme="mixed-dark"],
+body[data-layout="typeB"]:not([data-typeb-theme]) {
+  --lyrics-bg-primary: rgba(255, 255, 255, 0.1);
+  --lyrics-bg-secondary: rgba(255, 255, 255, 0.2);
+  --lyrics-text-primary: #ffffff;
+  --player-bg: rgba(255, 255, 255, 0.8);
+  --player-text-primary: #000000;
+  --player-text-secondary: rgba(0, 0, 0, 0.6);
+}

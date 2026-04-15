@@ -1,0 +1,11 @@
+/**
+ * Dark 테마 변수 및 스타일
+ * TypeB layout에서 data-typeb-theme="dark" 사용
+ */
+
+body[data-typeb-theme="dark"] {
+  --color-bg-primary: #1a1a1e;
+  --color-bg-secondary: #2a2a2f;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.65);
+}

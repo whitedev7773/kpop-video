@@ -1,0 +1,26 @@
+/**
+ * 그리드/메인 레이아웃
+ */
+
+main {
+  width: 1600px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, calc(-50% + 20px));
+}
+
+#mainBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 140px;
+  margin-bottom: 20px;
+}
+
+#musicControl {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 36px 0;
+}

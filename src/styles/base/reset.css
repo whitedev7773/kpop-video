@@ -1,0 +1,29 @@
+/**
+ * 기본 스타일 리셋
+ */
+
+body {
+  background-color: gray;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 클릭 후 잔상이 남는 현상 제거, 드래그 선택 방지 */
+* {
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input,
+textarea {
+  user-select: text;
+}
+
+.shadow {
+  filter: drop-shadow(0px 4px 12px var(--shadow-color));
+}

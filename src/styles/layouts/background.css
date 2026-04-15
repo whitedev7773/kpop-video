@@ -1,0 +1,35 @@
+/**
+ * 배경 영상 및 오버레이 스타일
+ */
+
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+  filter: blur(var(--blur-amount));
+  transform: scale(var(--video-scale));
+  transition: filter var(--transition-base) ease;
+}
+
+#bgOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.8) 20%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+#bgVideoInput {
+  display: none;
+}

@@ -1,3 +1,7 @@
+/**
+ * 진행률 바 및 파트 인디케이터 스타일
+ */
+
 #progressBar {
   width: 100%;
   display: flex;
@@ -43,7 +47,7 @@ body[data-layout="typeB"] #progressBar > input[type="text"] {
   will-change: width;
   position: relative;
   display: block;
-  width: 0%; /* 스크립트로 제어 */
+  width: 0%;
   height: 2px;
   border-radius: 2px;
   background-color: white;
@@ -99,13 +103,13 @@ body[data-layout="typeB"] #progressBar > input[type="text"] {
   white-space: nowrap;
 }
 
-/* ── Type B: 어두운 배경 위 진행바 → 밝은 배경 위 어두운 색 ── */
+/* Type B: 진행률 바 색상 변경 */
 
 body[data-layout="typeB"] #progressBar {
   filter: none;
 }
 
-/* ── 흰색 바 위 진행바: 어두운 색 (라이트, 혼합·어두운가사) */
+/* 흰색 바 위 진행바: 어두운 색 */
 body[data-layout="typeB"][data-typeb-theme="light"]
   #progressBar
   input[type="text"],
@@ -154,7 +158,7 @@ body[data-layout="typeB"]:not([data-typeb-theme])
   background-color: black;
 }
 
-/* ── 어두운 바 위 진행바: 흰색 (다크, 혼합·밝은가사) */
+/* 어두운 바 위 진행바: 흰색 */
 body[data-layout="typeB"][data-typeb-theme="dark"]
   #progressBar
   input[type="text"],

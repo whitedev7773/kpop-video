@@ -1,0 +1,25 @@
+/**
+ * 앨범 아트 스타일
+ */
+
+#albumArtButton {
+  margin: 0;
+  padding: 0;
+  width: 450px;
+  height: 450px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f0f0f0;
+  background-image: url(../assets/images/init_art.png);
+  cursor: pointer;
+  border-radius: 26px;
+}
+
+#albumArtButton:hover {
+  opacity: 0.8;
+}
+
+#albumArtInput {
+  display: none;
+}

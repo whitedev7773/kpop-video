@@ -1,0 +1,27 @@
+/**
+ * 입력 필드 스타일
+ */
+
+input,
+textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--color-text-primary);
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  transition: var(--btn-transition);
+}
+
+input:focus,
+textarea:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}

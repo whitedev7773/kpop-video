@@ -1,0 +1,59 @@
+/**
+ * Type B 레이아웃
+ */
+
+body[data-layout="typeB"] main {
+  width: 100%;
+  padding: 60px;
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+
+body[data-layout="typeB"] #mainBox {
+  flex: 1;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 0;
+  min-height: 0;
+}
+
+body[data-layout="typeB"] #albumArt-musicInfo {
+  display: none;
+}
+
+body[data-layout="typeB"] #bgOverlay {
+  background: none;
+}
+
+body[data-layout="typeB"] #musicControl {
+  position: relative;
+  backdrop-filter: blur(25px);
+  border-radius: 40px;
+  height: 128px;
+  overflow: hidden;
+  box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.05);
+  padding: 0;
+  gap: 0;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+/* 흰색 플레이어 바: 라이트, 혼합·어두운가사 */
+body[data-layout="typeB"][data-typeb-theme="light"] #musicControl,
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #musicControl,
+body[data-layout="typeB"]:not([data-typeb-theme]) #musicControl {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* 어두운 플레이어 바: 다크, 혼합·밝은가사 */
+body[data-layout="typeB"][data-typeb-theme="dark"] #musicControl,
+body[data-layout="typeB"][data-typeb-theme="mixed-light"] #musicControl {
+  background: rgba(0, 0, 0, 0.75);
+  box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.2);
+}

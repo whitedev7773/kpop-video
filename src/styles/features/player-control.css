@@ -1,3 +1,7 @@
+/**
+ * 플레이어 제어 버튼 스타일
+ */
+
 #playerControl {
   min-width: 450px;
   width: 450px;
@@ -31,8 +35,7 @@
   opacity: 0.5;
 }
 
-/* ── Type B 전용 요소 기본 상태 (TypeA에서 숨김) ───────────── */
-
+/* Type B 전용 요소 */
 #playerInfo {
   display: none;
 }
@@ -45,8 +48,7 @@
   display: contents;
 }
 
-/* ── Type B 플레이어 바 섹션 ────────────────────────────── */
-
+/* Type B 플레이어 바 */
 body[data-layout="typeB"] #playerInfo {
   display: flex;
   align-items: center;
@@ -120,7 +122,7 @@ body[data-layout="typeB"] #playerControl {
   gap: 40px;
 }
 
-/* ── 흰색 바 위 아이콘: 검은색으로 반전 (라이트, 혼합·어두운가사) */
+/* 흰색 바 위 아이콘: 검은색 */
 body[data-layout="typeB"][data-typeb-theme="light"] #playerControl button img,
 body[data-layout="typeB"][data-typeb-theme="mixed-dark"]
   #playerControl
@@ -130,7 +132,7 @@ body[data-layout="typeB"]:not([data-typeb-theme]) #playerControl button img {
   filter: invert(1);
 }
 
-/* ── 어두운 바 위 아이콘: 흰색 유지 (다크, 혼합·밝은가사) */
+/* 어두운 바 위 아이콘: 흰색 */
 body[data-layout="typeB"][data-typeb-theme="dark"] #playerControl button img,
 body[data-layout="typeB"][data-typeb-theme="mixed-light"]
   #playerControl
@@ -139,9 +141,9 @@ body[data-layout="typeB"][data-typeb-theme="mixed-light"]
   filter: none;
 }
 
-/* ── 흰색 바 위 정보 텍스트: 검은색 (라이트, 혼합·어두운가사) — 기본값이므로 생략 가능 */
+/* 흰색 바 위 정보 텍스트: 검은색 (기본값) */
 
-/* ── 어두운 바 위 정보 텍스트: 흰색 (다크, 혼합·밝은가사) */
+/* 어두운 바 위 정보 텍스트: 흰색 */
 body[data-layout="typeB"][data-typeb-theme="dark"] #playerInfoTitle,
 body[data-layout="typeB"][data-typeb-theme="mixed-light"] #playerInfoTitle {
   color: rgba(255, 255, 255, 0.95);

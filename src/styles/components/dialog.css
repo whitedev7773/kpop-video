@@ -1,0 +1,27 @@
+/**
+ * 다이얼로그 스타일
+ */
+
+dialog {
+  border: var(--dialog-border);
+  border-radius: var(--dialog-radius);
+  background: var(--dialog-bg);
+  backdrop-filter: var(--dialog-blur);
+  padding: 40px 56px;
+  color: var(--color-text-primary);
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  box-shadow: var(--dialog-shadow);
+}
+
+dialog[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+dialog::backdrop {
+  background: var(--dialog-backdrop-bg);
+  backdrop-filter: var(--dialog-backdrop-blur);
+}

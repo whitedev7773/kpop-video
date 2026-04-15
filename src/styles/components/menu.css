@@ -1,0 +1,72 @@
+/**
+ * 우클릭 컨텍스트 메뉴 스타일
+ */
+
+#albumArtMenu {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  background: rgba(30, 30, 30, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  min-width: 160px;
+  user-select: none;
+  transform-origin: top left;
+}
+
+#albumArtMenu.visible {
+  display: block;
+  animation: contextMenuIn 0.15s cubic-bezier(0.2, 0, 0.13, 1) forwards;
+}
+
+#albumArtMenu.hiding {
+  display: block;
+  animation: contextMenuOut 0.12s cubic-bezier(0.2, 0, 0.13, 1) forwards;
+}
+
+#albumArtMenu li {
+  padding: 9px 16px;
+  color: rgba(255, 255, 255, 0.88);
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#albumArtMenu li:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#albumArtMenu .menu-separator {
+  height: 1px;
+  margin: 5px 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.12);
+  cursor: default;
+}
+
+#albumArtMenu .menu-separator:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* TypeB 전용 메뉴 항목 */
+.typeb-only {
+  display: none;
+}
+
+body[data-layout="typeB"] #albumArtMenu .typeb-only {
+  display: block;
+}
+
+/* 활성 테마 표시 */
+#menuThemeLight[data-active="true"],
+#menuThemeDark[data-active="true"],
+#menuThemeMixedLight[data-active="true"],
+#menuThemeMixedDark[data-active="true"] {
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+}

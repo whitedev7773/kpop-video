@@ -1,0 +1,404 @@
+/**
+ * 가사 표시 및 저작 스타일
+ * 가사 입력 다이얼로그 및 가사 렌더링
+ */
+
+/* 가사 입력 다이얼로그 */
+#lyricsSetting {
+  opacity: 1;
+  transform: translateY(0px) scale(1);
+  transition:
+    opacity 0.22s cubic-bezier(0.2, 0, 0.13, 1),
+    transform 0.22s cubic-bezier(0.2, 0, 0.13, 1),
+    display 0.22s allow-discrete;
+}
+
+#lyricsSetting:not([open]) {
+  opacity: 0;
+  transform: translateY(0px) scale(0.95);
+}
+
+#lyricsSetting::backdrop {
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  transition:
+    display 0.22s allow-discrete,
+    background-color 0.22s cubic-bezier(0.2, 0, 0.13, 1),
+    backdrop-filter 0.22s cubic-bezier(0.2, 0, 0.13, 1);
+}
+
+#lyricsSetting[open]::backdrop {
+  background-color: var(--dialog-backdrop-bg);
+  backdrop-filter: var(--dialog-backdrop-blur);
+}
+
+#lyricsSetting {
+  border: var(--dialog-border);
+  border-radius: var(--dialog-radius);
+  padding: 30px;
+  width: 500px;
+  max-width: 90vw;
+  background: var(--dialog-bg);
+  backdrop-filter: var(--dialog-blur);
+  box-shadow: var(--dialog-shadow);
+  font-family: "Pretendard Variable", sans-serif;
+  color: var(--color-text-primary);
+}
+
+#lyricsSetting h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: var(--color-text-primary);
+}
+
+/* 가사 모드 셀렉터 */
+#lyricsModeSelector {
+  width: 100%;
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+#lyricsModeSelector label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  border: none;
+  background: none;
+}
+
+#lyricsModeSelector input[type="radio"] {
+  display: none;
+}
+
+#lyricsModeSelector input[type="radio"]:checked + label {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+#lyricsModeSelector .mode-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-primary);
+}
+
+#lyricsModeSelector .mode-option.active {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+/* 가사 입력 필드 */
+#lyricsInput {
+  width: 100%;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--color-text-primary);
+  resize: vertical;
+  outline: none;
+  transition: border-color var(--transition-fast);
+  min-height: 120px;
+}
+
+#lyricsInput:focus {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+#lyricsSetting form {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+#lyricsSetting form button,
+#saveLyricsBtn {
+  padding: 9px 20px;
+  border-radius: var(--btn-radius);
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--btn-transition);
+}
+
+#lyricsSetting form button {
+  background: var(--color-surface-hover);
+  color: var(--color-text-secondary);
+}
+
+#lyricsSetting form button:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-text-primary);
+}
+
+#saveLyricsBtn {
+  background: #3383fa !important;
+  color: #fff !important;
+}
+
+#saveLyricsBtn:hover {
+  filter: brightness(1.05);
+}
+
+/* 가사 표시 영역 */
+#lyricsBox {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  transform: translateY(-10px);
+  margin-right: 100px;
+
+  /* 모드별 간격 변수 */
+  --lyrics-offset-1: 108px;
+  --lyrics-offset-2: 210px;
+  --lyrics-offset-3: 312px;
+}
+
+#lyricsBox[data-mode="english"] {
+  --lyrics-offset-1: 180px;
+  --lyrics-offset-2: 355px;
+  --lyrics-offset-3: 530px;
+}
+
+#lyricsBox[data-mode="japanese"] {
+  --lyrics-offset-1: 225px;
+  --lyrics-offset-2: 425px;
+  --lyrics-offset-3: 625px;
+}
+
+/* 가사 요소 */
+#lyricsBox > .lyric-line {
+  position: absolute;
+  transition: all var(--transition-lyrics) cubic-bezier(0.35, 0.06, 0.16, 1);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+#lyricsBox > .lyric-line p {
+  margin: 0;
+  padding: 0;
+  font-family: "A2Z", sans-serif;
+  color: var(--color-white);
+  white-space: nowrap;
+  text-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+  transition: font-size var(--transition-lyrics)
+    cubic-bezier(0.35, 0.06, 0.16, 1);
+}
+
+#lyricsBox > .lyric-line.focus p {
+  text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 위치 */
+#lyricsBox > .lyric-line.post {
+  opacity: 0;
+  transform: translate(-50%, calc(-50% - var(--lyrics-offset-3)));
+}
+
+#lyricsBox > .lyric-line.post-focus:nth-child(1 of .post-focus) {
+  opacity: 0.3;
+  transform: translate(-50%, calc(-50% - var(--lyrics-offset-2)));
+}
+
+#lyricsBox > .lyric-line.post-focus:nth-child(2 of .post-focus) {
+  opacity: 0.5;
+  transform: translate(-50%, calc(-50% - var(--lyrics-offset-1)));
+}
+
+#lyricsBox > .lyric-line.focus {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+#lyricsBox > .lyric-line.pre-focus:nth-child(1 of .pre-focus) {
+  opacity: 0.5;
+  transform: translate(-50%, calc(-50% + var(--lyrics-offset-1)));
+}
+
+#lyricsBox > .lyric-line.pre-focus:nth-child(2 of .pre-focus) {
+  opacity: 0.3;
+  transform: translate(-50%, calc(-50% + var(--lyrics-offset-2)));
+}
+
+#lyricsBox > .lyric-line.pre {
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + var(--lyrics-offset-3)));
+}
+
+/* Type B */
+body[data-layout="typeB"] #lyricsBox {
+  flex: 1;
+  height: auto;
+  width: 100%;
+  margin-right: 0;
+  transform: none;
+  border-radius: 40px;
+  backdrop-filter: blur(70px);
+  box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Type B 테마별 배경 */
+body[data-layout="typeB"][data-typeb-theme="light"] #lyricsBox,
+body[data-layout="typeB"][data-typeb-theme="mixed-light"] #lyricsBox {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.18)
+  );
+}
+
+body[data-layout="typeB"][data-typeb-theme="light"] #lyricsBox > .lyric-line p,
+body[data-layout="typeB"][data-typeb-theme="mixed-light"]
+  #lyricsBox
+  > .lyric-line
+  p {
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+body[data-layout="typeB"][data-typeb-theme="dark"] #lyricsBox,
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #lyricsBox,
+body[data-layout="typeB"]:not([data-typeb-theme]) #lyricsBox {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.2)
+  );
+}
+
+/* Type B 텍스트 크기 */
+body[data-layout="typeB"] #lyricsBox[data-mode="korean"] > .lyric-line,
+body[data-layout="typeB"] #lyricsBox[data-mode="english"] > .lyric-line,
+body[data-layout="typeB"] #lyricsBox[data-mode="japanese"] > .lyric-line {
+  align-items: center;
+  text-align: center;
+}
+
+body[data-layout="typeB"] #lyricsBox .lyric-main,
+body[data-layout="typeB"] #lyricsBox .lyric-top,
+body[data-layout="typeB"] #lyricsBox .lyric-mid,
+body[data-layout="typeB"] #lyricsBox .lyric-bottom {
+  font-size: 37.5px;
+}
+
+body[data-layout="typeB"] #lyricsBox > .lyric-line.focus .lyric-main,
+body[data-layout="typeB"] #lyricsBox > .lyric-line.focus .lyric-top,
+body[data-layout="typeB"] #lyricsBox > .lyric-line.focus .lyric-mid,
+body[data-layout="typeB"] #lyricsBox > .lyric-line.focus .lyric-bottom {
+  font-size: 50px;
+}
+
+/* 한국어 모드 */
+#lyricsBox[data-mode="korean"] > .lyric-line {
+  text-align: left;
+}
+
+#lyricsBox[data-mode="korean"] .lyric-main {
+  font-weight: 700;
+  font-size: 47.6px;
+}
+
+#lyricsBox[data-mode="korean"] > .lyric-line.focus .lyric-main {
+  font-size: 56px;
+}
+
+/* 영어 모드 */
+#lyricsBox[data-mode="english"]
+  > .lyric-line.post-focus:nth-child(1 of .post-focus) {
+  opacity: 0;
+}
+
+#lyricsBox[data-mode="english"]
+  > .lyric-line.pre-focus:nth-child(2 of .pre-focus) {
+  opacity: 0;
+}
+
+#lyricsBox[data-mode="english"] > .lyric-line {
+  gap: 12.8px;
+}
+
+#lyricsBox[data-mode="english"] > .lyric-line.focus {
+  gap: 16px;
+}
+
+#lyricsBox[data-mode="english"] .lyric-main {
+  font-weight: 700;
+  font-size: 44.8px;
+}
+
+#lyricsBox[data-mode="english"] > .lyric-line.focus .lyric-main {
+  font-size: 56px;
+}
+
+#lyricsBox[data-mode="english"] .lyric-sub {
+  font-weight: 400;
+  font-size: 30px;
+  opacity: 0.5;
+}
+
+/* 일본어 모드 */
+#lyricsBox[data-mode="japanese"]
+  > .lyric-line.post-focus:nth-child(1 of .post-focus) {
+  opacity: 0;
+}
+
+#lyricsBox[data-mode="japanese"]
+  > .lyric-line.pre-focus:nth-child(2 of .pre-focus) {
+  opacity: 0;
+}
+
+#lyricsBox[data-mode="japanese"] > .lyric-line {
+  gap: 9px;
+}
+
+#lyricsBox[data-mode="japanese"] > .lyric-line.focus {
+  gap: 12px;
+}
+
+#lyricsBox[data-mode="japanese"] .lyric-top,
+#lyricsBox[data-mode="japanese"] .lyric-mid,
+#lyricsBox[data-mode="japanese"] .lyric-bottom {
+  font-size: 34.5px;
+}
+
+#lyricsBox[data-mode="japanese"] > .lyric-line.focus .lyric-top,
+#lyricsBox[data-mode="japanese"] > .lyric-line.focus .lyric-mid,
+#lyricsBox[data-mode="japanese"] > .lyric-line.focus .lyric-bottom {
+  font-size: 46px;
+}
+
+#lyricsBox[data-mode="japanese"] .lyric-top {
+  font-weight: 400;
+}
+
+#lyricsBox[data-mode="japanese"] .lyric-mid {
+  font-weight: 700;
+}
+
+#lyricsBox[data-mode="japanese"] .lyric-bottom {
+  font-weight: 700;
+}

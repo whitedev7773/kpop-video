@@ -10,20 +10,11 @@
       rel="stylesheet"
       href="./src/assets/fonts/pretendardvariable/pretendardvariable.css"
     />
-    <!-- Styles -->
-    <link rel="stylesheet" href="./src/styles/global.css" />
-    <link rel="stylesheet" href="./src/styles/album-art.css" />
-    <link rel="stylesheet" href="./src/styles/music-info.css" />
-    <link rel="stylesheet" href="./src/styles/lyrics.css" />
-    <link rel="stylesheet" href="./src/styles/progress-bar.css" />
-    <link rel="stylesheet" href="./src/styles/player-control.css" />
-    <link rel="stylesheet" href="./src/styles/tutorial.css" />
+    <!-- Styles (통합) -->
+    <link rel="stylesheet" href="./src/styles/index.css" />
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="./src/scripts/album-art.js" defer></script>
-    <script src="./src/scripts/lyrics.js" defer></script>
-    <script src="./src/scripts/player-control.js" defer></script>
-    <script src="./src/scripts/tutorial.js" defer></script>
+    <script src="./src/scripts/index.js" type="module" defer></script>
   </head>
   <body data-layout="typeA" data-typeb-theme="mixed-dark">
     <video id="bgVideo" muted playsinline></video>
@@ -131,11 +122,19 @@
           </div>
         </div>
         <div id="lyricsBox" class="shadow" data-mode="korean">
-          <div class="lyric-line post-focus"><p class="lyric-main">&nbsp;</p></div>
-          <div class="lyric-line post-focus"><p class="lyric-main">&nbsp;</p></div>
+          <div class="lyric-line post-focus">
+            <p class="lyric-main">&nbsp;</p>
+          </div>
+          <div class="lyric-line post-focus">
+            <p class="lyric-main">&nbsp;</p>
+          </div>
           <div class="lyric-line focus"><p class="lyric-main">&nbsp;</p></div>
-          <div class="lyric-line pre-focus"><p class="lyric-main">가사1</p></div>
-          <div class="lyric-line pre-focus"><p class="lyric-main">가사2</p></div>
+          <div class="lyric-line pre-focus">
+            <p class="lyric-main">가사1</p>
+          </div>
+          <div class="lyric-line pre-focus">
+            <p class="lyric-main">가사2</p>
+          </div>
           <div class="lyric-line pre"><p class="lyric-main">가사3</p></div>
           <div class="lyric-line pre"><p class="lyric-main">가사4</p></div>
           <div class="lyric-line pre"><p class="lyric-main">가사5</p></div>
@@ -167,7 +166,11 @@
                 <img src="src/assets/icons/previous.svg" alt="previous" />
               </button>
               <button class="btn-large">
-                <img src="src/assets/icons/play.svg" alt="play" id="play-pause" />
+                <img
+                  src="src/assets/icons/play.svg"
+                  alt="play"
+                  id="play-pause"
+                />
               </button>
               <button class="btn-medium">
                 <img src="src/assets/icons/next.svg" alt="next" />
