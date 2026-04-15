@@ -94,3 +94,55 @@
   font-weight: 500;
   white-space: nowrap;
 }
+
+/* ── Type B: 어두운 배경 위 진행바 → 밝은 배경 위 어두운 색 ── */
+
+body[data-layout="typeB"] #progressBar {
+  filter: none;
+}
+
+/* ── 흰색 바 위 진행바: 어두운 색 (라이트, 혼합·어두운가사) */
+body[data-layout="typeB"][data-typeb-theme="light"] #progressBar input[type="text"],
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #progressBar input[type="text"],
+body[data-layout="typeB"]:not([data-typeb-theme]) #progressBar input[type="text"] {
+  color: rgba(0, 0, 0, 0.50);
+}
+
+body[data-layout="typeB"][data-typeb-theme="light"] #progressBar > #body,
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #progressBar > #body,
+body[data-layout="typeB"]:not([data-typeb-theme]) #progressBar > #body {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+body[data-layout="typeB"][data-typeb-theme="light"] #progressBar > #body > #fill,
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #progressBar > #body > #fill,
+body[data-layout="typeB"]:not([data-typeb-theme]) #progressBar > #body > #fill {
+  background-color: black;
+}
+
+body[data-layout="typeB"][data-typeb-theme="light"] #progressBar > #body > #fill > #thumb,
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #progressBar > #body > #fill > #thumb,
+body[data-layout="typeB"]:not([data-typeb-theme]) #progressBar > #body > #fill > #thumb {
+  background-color: black;
+}
+
+/* ── 어두운 바 위 진행바: 흰색 (다크, 혼합·밝은가사) */
+body[data-layout="typeB"][data-typeb-theme="dark"] #progressBar input[type="text"],
+body[data-layout="typeB"][data-typeb-theme="mixed-light"] #progressBar input[type="text"] {
+  color: rgba(255, 255, 255, 0.50);
+}
+
+body[data-layout="typeB"][data-typeb-theme="dark"] #progressBar > #body,
+body[data-layout="typeB"][data-typeb-theme="mixed-light"] #progressBar > #body {
+  background-color: rgba(255, 255, 255, 0.20);
+}
+
+body[data-layout="typeB"][data-typeb-theme="dark"] #progressBar > #body > #fill,
+body[data-layout="typeB"][data-typeb-theme="mixed-light"] #progressBar > #body > #fill {
+  background-color: white;
+}
+
+body[data-layout="typeB"][data-typeb-theme="dark"] #progressBar > #body > #fill > #thumb,
+body[data-layout="typeB"][data-typeb-theme="mixed-light"] #progressBar > #body > #fill > #thumb {
+  background-color: white;
+}

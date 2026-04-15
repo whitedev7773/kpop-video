@@ -265,6 +265,142 @@
   transition-delay: 0.12s;
 }
 
+/* ══════════════════════════════════════════════════════════
+   Type B 공통 구조
+   ══════════════════════════════════════════════════════════ */
+
+body[data-layout="typeB"] #lyricsBox {
+  flex: 1;
+  height: auto;
+  width: 100%;
+  margin-right: 0;
+  transform: none;
+  border-radius: 40px;
+  /* Figma: Lyrics/Body/Background Blur = 70 */
+  backdrop-filter: blur(70px);
+  /* Figma: Lyrics/Body/Shadow = 4px 4px 30px rgba(0,0,0,0.05) */
+  box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Theme 1 — 라이트 (Light)
+   가사 박스: 밝은 흰색   플레이어 바: 흰색
+   ══════════════════════════════════════════════════════════ */
+
+body[data-layout="typeB"][data-typeb-theme="light"] #lyricsBox {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.18)
+  );
+}
+
+body[data-layout="typeB"][data-typeb-theme="light"] #lyricsBox > .lyric-line p {
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Theme 2 — 다크 (Dark)
+   가사 박스: 어두운   플레이어 바: 어두운
+   ══════════════════════════════════════════════════════════ */
+
+body[data-layout="typeB"][data-typeb-theme="dark"] #lyricsBox {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.2)
+  );
+}
+/* 가사 텍스트: 기본 흰색 유지 */
+
+/* ══════════════════════════════════════════════════════════
+   Theme 3 — 혼합 · 밝은 가사 (Mixed A)
+   가사 박스: 밝은 흰색   플레이어 바: 어두운
+   ══════════════════════════════════════════════════════════ */
+
+body[data-layout="typeB"][data-typeb-theme="mixed-light"] #lyricsBox {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.18)
+  );
+}
+
+body[data-layout="typeB"][data-typeb-theme="mixed-light"]
+  #lyricsBox
+  > .lyric-line
+  p {
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Theme 4 — 혼합 · 어두운 가사 (Mixed B) — Figma 기본값
+   가사 박스: 반투명 (어두운)   플레이어 바: 흰색
+   Figma: Gradient Top #ffffff0d (5.1%), Bottom #ffffff33 (20%)
+   ══════════════════════════════════════════════════════════ */
+
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #lyricsBox,
+body[data-layout="typeB"]:not([data-typeb-theme]) #lyricsBox {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.2)
+  );
+}
+/* 가사 텍스트: 기본 흰색 유지 */
+
+/* TypeB: 가사 텍스트 크기 (Figma: 비포커스 37.5px, 포커스 50px) */
+
+body[data-layout="typeB"] #lyricsBox[data-mode="korean"] > .lyric-line {
+  align-items: center;
+  text-align: center;
+}
+
+body[data-layout="typeB"] #lyricsBox[data-mode="korean"] .lyric-main {
+  font-size: 37.5px;
+}
+
+body[data-layout="typeB"]
+  #lyricsBox[data-mode="korean"]
+  > .lyric-line.focus
+  .lyric-main {
+  font-size: 50px;
+}
+
+body[data-layout="typeB"] #lyricsBox[data-mode="english"] .lyric-main {
+  font-size: 37.5px;
+}
+
+body[data-layout="typeB"]
+  #lyricsBox[data-mode="english"]
+  > .lyric-line.focus
+  .lyric-main {
+  font-size: 50px;
+}
+
+body[data-layout="typeB"] #lyricsBox[data-mode="japanese"] .lyric-top,
+body[data-layout="typeB"] #lyricsBox[data-mode="japanese"] .lyric-mid,
+body[data-layout="typeB"] #lyricsBox[data-mode="japanese"] .lyric-bottom {
+  font-size: 37.5px;
+}
+
+body[data-layout="typeB"]
+  #lyricsBox[data-mode="japanese"]
+  > .lyric-line.focus
+  .lyric-top,
+body[data-layout="typeB"]
+  #lyricsBox[data-mode="japanese"]
+  > .lyric-line.focus
+  .lyric-mid,
+body[data-layout="typeB"]
+  #lyricsBox[data-mode="japanese"]
+  > .lyric-line.focus
+  .lyric-bottom {
+  font-size: 50px;
+}
+
 /* ═══════════════════════════════════════════════════════
    한국어 모드 (Korean) — 한 줄, 좌측 정렬
    ═══════════════════════════════════════════════════════ */

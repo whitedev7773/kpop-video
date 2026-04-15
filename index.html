@@ -25,7 +25,7 @@
     <script src="./src/scripts/player-control.js" defer></script>
     <script src="./src/scripts/tutorial.js" defer></script>
   </head>
-  <body>
+  <body data-layout="typeA" data-typeb-theme="mixed-dark">
     <video id="bgVideo" muted playsinline></video>
     <div id="bgOverlay"></div>
     <input type="file" id="bgVideoInput" accept="video/*" />
@@ -147,41 +147,54 @@
       </section>
       <!-- 음악 제어 파트 -->
       <div id="musicControl">
-        <!-- 셔플/이전/재생/다음/반복 -->
-        <div id="playerControl" class="shadow">
-          <button class="btn-small">
-            <img src="src/assets/icons/shuffle.svg" alt="shuffle" />
-          </button>
-          <div id="main">
-            <button class="btn-medium">
-              <img src="src/assets/icons/previous.svg" alt="previous" />
+        <!-- TypeB: 앨범아트 썸네일 + 곡 정보 (TypeA에서는 숨김) -->
+        <div id="playerInfo">
+          <div id="playerArtThumb"></div>
+          <div id="playerInfoText">
+            <p id="playerInfoTitle">Music Name</p>
+            <p id="playerInfoArtist">Artist Name</p>
+          </div>
+        </div>
+        <!-- 컨트롤 래퍼 (TypeA: display:contents, TypeB: flex-col) -->
+        <div id="controlsCenter">
+          <!-- 셔플/이전/재생/다음/반복 -->
+          <div id="playerControl" class="shadow">
+            <button class="btn-small">
+              <img src="src/assets/icons/shuffle.svg" alt="shuffle" />
             </button>
-            <button class="btn-large">
-              <img src="src/assets/icons/play.svg" alt="play" id="play-pause" />
-            </button>
-            <button class="btn-medium">
-              <img src="src/assets/icons/next.svg" alt="next" />
+            <div id="main">
+              <button class="btn-medium">
+                <img src="src/assets/icons/previous.svg" alt="previous" />
+              </button>
+              <button class="btn-large">
+                <img src="src/assets/icons/play.svg" alt="play" id="play-pause" />
+              </button>
+              <button class="btn-medium">
+                <img src="src/assets/icons/next.svg" alt="next" />
+              </button>
+            </div>
+            <button class="btn-small">
+              <img src="src/assets/icons/repeat.svg" alt="repeat" />
             </button>
           </div>
-          <button class="btn-small">
-            <img src="src/assets/icons/repeat.svg" alt="repeat" />
-          </button>
-        </div>
-        <!-- 진행률 -->
-        <div id="progressBar" class="shadow">
-          <input type="text" id="currentTime" value="00:00" readonly />
-          <div id="body">
-            <span id="fill">
-              <span id="thumb">
-                <!-- 파트 표시 요소 -->
-                <span id="partIndicator-triangle">
-                  <span id="partIndicator">1절 - 1</span>
+          <!-- 진행률 -->
+          <div id="progressBar" class="shadow">
+            <input type="text" id="currentTime" value="00:00" readonly />
+            <div id="body">
+              <span id="fill">
+                <span id="thumb">
+                  <!-- 파트 표시 요소 -->
+                  <span id="partIndicator-triangle">
+                    <span id="partIndicator">1절 - 1</span>
+                  </span>
                 </span>
               </span>
-            </span>
+            </div>
+            <input type="text" id="endTime" value="00:00" readonly />
           </div>
-          <input type="text" id="endTime" value="00:00" readonly />
         </div>
+        <!-- TypeB: 레이아웃 균형용 우측 여백 (TypeA에서는 숨김) -->
+        <div id="playerMenu"></div>
       </div>
     </main>
   </body>

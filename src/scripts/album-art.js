@@ -6,6 +6,10 @@ const loadingMessage = document.getElementById('loadingMessage');
 const loadingProgressFill = document.getElementById('loadingProgressFill');
 const toast = document.getElementById('toast');
 
+// 레이아웃 및 TypeB 테마 설정 복원
+document.body.dataset.layout = localStorage.getItem('kpop-layout') || 'typeA';
+document.body.dataset.typebTheme = localStorage.getItem('kpop-typeb-theme') || 'mixed-dark';
+
 let toastTimer;
 function showToast(message, duration = 4000) {
     clearTimeout(toastTimer);
@@ -47,6 +51,13 @@ contextMenu.innerHTML = `
     <li id="menuLoadImage">앨범 아트 변경</li>
     <li id="menuLoadMusic">음악 변경</li>
     <li id="menuLoadVideo">배경 영상 변경</li>
+    <li class="menu-separator"></li>
+    <li id="menuToggleLayout">디자인 B로 변경</li>
+    <li class="menu-separator typeb-only"></li>
+    <li id="menuThemeLight" class="typeb-only">라이트</li>
+    <li id="menuThemeDark" class="typeb-only">다크</li>
+    <li id="menuThemeMixedLight" class="typeb-only">혼합 · 밝은 가사</li>
+    <li id="menuThemeMixedDark" class="typeb-only">혼합 · 어두운 가사</li>
 `;
 document.body.appendChild(contextMenu);
 
@@ -93,6 +104,74 @@ document.getElementById('menuLoadVideo').addEventListener('click', () => {
     hideMenu();
     window.openVideoInput();
 });
+document.getElementById('menuToggleLayout').addEventListener('click', () => {
+    hideMenu();
+    const next = document.body.dataset.layout === 'typeB' ? 'typeA' : 'typeB';
+    document.body.dataset.layout = next;
+    localStorage.setItem('kpop-layout', next);
+    updateToggleLabel();
+});
+
+function updateToggleLabel() {
+    const isTypeB = document.body.dataset.layout === 'typeB';
+    document.getElementById('menuToggleLayout').textContent =
+        isTypeB ? '디자인 A로 변경' : '디자인 B로 변경';
+}
+updateToggleLabel();
+
+// TypeB 테마 전환
+document.getElementById('menuThemeLight').addEventListener('click', () => {
+    hideMenu();
+    setTypeBTheme('light');
+});
+document.getElementById('menuThemeDark').addEventListener('click', () => {
+    hideMenu();
+    setTypeBTheme('dark');
+});
+document.getElementById('menuThemeMixedLight').addEventListener('click', () => {
+    hideMenu();
+    setTypeBTheme('mixed-light');
+});
+document.getElementById('menuThemeMixedDark').addEventListener('click', () => {
+    hideMenu();
+    setTypeBTheme('mixed-dark');
+});
+
+function setTypeBTheme(theme) {
+    document.body.dataset.typebTheme = theme;
+    localStorage.setItem('kpop-typeb-theme', theme);
+    updateTypeBThemeLabels();
+}
+
+function updateTypeBThemeLabels() {
+    const current = document.body.dataset.typebTheme || 'mixed-dark';
+    const themes = [
+        { key: 'light', id: 'menuThemeLight', label: '라이트' },
+        { key: 'dark', id: 'menuThemeDark', label: '다크' },
+        { key: 'mixed-light', id: 'menuThemeMixedLight', label: '혼합 · 밝은 가사' },
+        { key: 'mixed-dark', id: 'menuThemeMixedDark', label: '혼합 · 어두운 가사' },
+    ];
+    for (const { key, id, label } of themes) {
+        const el = document.getElementById(id);
+        el.dataset.active = (key === current).toString();
+        el.textContent = (key === current ? '✓ ' : '    ') + label;
+    }
+}
+updateTypeBThemeLabels();
+
+// TypeB 플레이어 바 썸네일·텍스트 동기화
+function syncPlayerInfo() {
+    const art = imageButton.style.backgroundImage;
+    if (art) document.getElementById('playerArtThumb').style.backgroundImage = art;
+    document.getElementById('playerInfoTitle').textContent =
+        document.getElementById('musicTitle').value;
+    document.getElementById('playerInfoArtist').textContent =
+        document.getElementById('artistName').value;
+}
+syncPlayerInfo();
+
+document.getElementById('musicTitle').addEventListener('input', syncPlayerInfo);
+document.getElementById('artistName').addEventListener('input', syncPlayerInfo);
 
 // 메뉴 외부 클릭 또는 Escape 시 닫기
 document.addEventListener('click', hideMenu);
@@ -110,6 +189,7 @@ fileInput.addEventListener('change', function() {
         reader.onload = function(e) {
             imageButton.style.backgroundImage = `url('${e.target.result}')`;
             imageButton.textContent = '';
+            syncPlayerInfo();
             hideLoading();
         };
         reader.readAsDataURL(file);
@@ -133,6 +213,7 @@ zipInput.addEventListener('change', async function() {
         } else {
             document.getElementById('musicTitle').value = zipName.trim();
         }
+        syncPlayerInfo();
 
         // ZIP 압축 해제 (onUpdate로 진행률 수신)
         const zip = await JSZip.loadAsync(file, {
@@ -150,6 +231,7 @@ zipInput.addEventListener('change', async function() {
                     const url = URL.createObjectURL(blob);
                     imageButton.style.backgroundImage = `url('${url}')`;
                     imageButton.textContent = '';
+                    syncPlayerInfo();
                 },
             },
             {

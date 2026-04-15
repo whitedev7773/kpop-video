@@ -2,6 +2,28 @@
     width: 450px;
 }
 
+body[data-layout="typeB"] #albumArt-musicInfo {
+    display: none;
+}
+
+/* TypeB 전용 메뉴 항목: TypeA에서는 숨김 */
+.typeb-only {
+    display: none;
+}
+
+body[data-layout="typeB"] #albumArtMenu .typeb-only {
+    display: block;
+}
+
+/* 활성 테마 표시 */
+#menuThemeLight[data-active="true"],
+#menuThemeDark[data-active="true"],
+#menuThemeMixedLight[data-active="true"],
+#menuThemeMixedDark[data-active="true"] {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+}
+
 #albumArtButton {
     margin: 0;
     padding: 0;
