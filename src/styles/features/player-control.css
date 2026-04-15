@@ -62,7 +62,7 @@ body[data-layout="typeB"] #playerArtThumb {
   height: 128px;
   background-size: cover;
   background-position: center;
-  background-image: url("../assets/images/init_art.png");
+  background-image: url("/src/assets/images/init_art.png");
   flex-shrink: 0;
 }
 

@@ -11,7 +11,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: #f0f0f0;
-  background-image: url(../assets/images/init_art.png);
+  background-image: url(/src/assets/images/init_art.png);
   cursor: pointer;
   border-radius: 26px;
 }
