@@ -18,7 +18,7 @@
   /* 다이얼로그 공통 */
   --dialog-bg: rgba(22, 22, 26, 0.96);
   --dialog-blur: blur(20px);
-  --dialog-border: 1px solid rgba(255, 255, 255, 0.10);
+  --dialog-border: 1px solid rgba(255, 255, 255, 0.1);
   --dialog-radius: 20px;
   --dialog-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
   --dialog-backdrop-bg: rgba(0, 0, 0, 0.55);
@@ -55,7 +55,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-input, textarea {
+input,
+textarea {
   user-select: text;
 }
 
@@ -124,14 +125,16 @@ main {
   background: var(--dialog-bg);
   backdrop-filter: var(--dialog-blur);
   color: var(--color-text-primary);
-  font-family: 'Pretendard Variable', sans-serif;
+  font-family: "Pretendard Variable", sans-serif;
   font-size: 14px;
   padding: 12px 24px;
   border-radius: 100px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
   white-space: nowrap;
   z-index: 9999;
 }
@@ -149,7 +152,7 @@ main {
   backdrop-filter: var(--dialog-blur);
   padding: 40px 56px;
   color: var(--color-text-primary);
-  font-family: 'Pretendard Variable', sans-serif;
+  font-family: "Pretendard Variable", sans-serif;
   font-size: 15px;
   letter-spacing: 0.02em;
   box-shadow: var(--dialog-shadow);
@@ -181,7 +184,9 @@ main {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 #loadingMessage {
@@ -227,6 +232,7 @@ body[data-layout="typeB"] main {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  transform: translate(-50%, -50%);
 }
 
 body[data-layout="typeB"] #mainBox {
@@ -258,12 +264,12 @@ body[data-layout="typeB"] #musicControl {
 body[data-layout="typeB"][data-typeb-theme="light"] #musicControl,
 body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #musicControl,
 body[data-layout="typeB"]:not([data-typeb-theme]) #musicControl {
-  background: rgba(255, 255, 255, 0.80);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* ── 어두운 플레이어 바: 다크, 혼합·밝은가사 */
 body[data-layout="typeB"][data-typeb-theme="dark"] #musicControl,
 body[data-layout="typeB"][data-typeb-theme="mixed-light"] #musicControl {
   background: rgba(0, 0, 0, 0.75);
-  box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.20);
+  box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.2);
 }

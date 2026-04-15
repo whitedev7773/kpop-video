@@ -60,7 +60,7 @@ body[data-layout="typeB"] #playerArtThumb {
   height: 128px;
   background-size: cover;
   background-position: center;
-  background-image: url('../assets/images/init_art.png');
+  background-image: url("../assets/images/init_art.png");
   flex-shrink: 0;
 }
 
@@ -71,21 +71,31 @@ body[data-layout="typeB"] #playerInfoText {
 }
 
 body[data-layout="typeB"] #playerInfoTitle {
-  font-family: 'Pretendard Variable', sans-serif;
+  font-family: "A2Z", sans-serif;
   font-size: 24px;
   font-weight: 500;
   letter-spacing: -1.2px;
   color: black;
   margin: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  width: 100%;
 }
 
 body[data-layout="typeB"] #playerInfoArtist {
-  font-family: 'Pretendard Variable', sans-serif;
+  font-family: "A2Z", sans-serif;
   font-size: 20px;
   font-weight: 200;
   letter-spacing: -1px;
   color: rgba(0, 0, 0, 0.6);
   margin: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  width: 100%;
 }
 
 body[data-layout="typeB"] #controlsCenter {
@@ -112,14 +122,20 @@ body[data-layout="typeB"] #playerControl {
 
 /* ── 흰색 바 위 아이콘: 검은색으로 반전 (라이트, 혼합·어두운가사) */
 body[data-layout="typeB"][data-typeb-theme="light"] #playerControl button img,
-body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #playerControl button img,
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"]
+  #playerControl
+  button
+  img,
 body[data-layout="typeB"]:not([data-typeb-theme]) #playerControl button img {
   filter: invert(1);
 }
 
 /* ── 어두운 바 위 아이콘: 흰색 유지 (다크, 혼합·밝은가사) */
 body[data-layout="typeB"][data-typeb-theme="dark"] #playerControl button img,
-body[data-layout="typeB"][data-typeb-theme="mixed-light"] #playerControl button img {
+body[data-layout="typeB"][data-typeb-theme="mixed-light"]
+  #playerControl
+  button
+  img {
   filter: none;
 }
 
@@ -133,7 +149,7 @@ body[data-layout="typeB"][data-typeb-theme="mixed-light"] #playerInfoTitle {
 
 body[data-layout="typeB"][data-typeb-theme="dark"] #playerInfoArtist,
 body[data-layout="typeB"][data-typeb-theme="mixed-light"] #playerInfoArtist {
-  color: rgba(255, 255, 255, 0.60);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 body[data-layout="typeB"] #playerMenu {

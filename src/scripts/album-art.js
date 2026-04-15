@@ -163,15 +163,23 @@ updateTypeBThemeLabels();
 function syncPlayerInfo() {
     const art = imageButton.style.backgroundImage;
     if (art) document.getElementById('playerArtThumb').style.backgroundImage = art;
-    document.getElementById('playerInfoTitle').textContent =
+    document.getElementById('playerInfoTitle').value =
         document.getElementById('musicTitle').value;
-    document.getElementById('playerInfoArtist').textContent =
+    document.getElementById('playerInfoArtist').value =
         document.getElementById('artistName').value;
 }
 syncPlayerInfo();
 
 document.getElementById('musicTitle').addEventListener('input', syncPlayerInfo);
 document.getElementById('artistName').addEventListener('input', syncPlayerInfo);
+
+// TypeB input → TypeA input 역방향 동기화
+document.getElementById('playerInfoTitle').addEventListener('input', function() {
+    document.getElementById('musicTitle').value = this.value;
+});
+document.getElementById('playerInfoArtist').addEventListener('input', function() {
+    document.getElementById('artistName').value = this.value;
+});
 
 // 메뉴 외부 클릭 또는 Escape 시 닫기
 document.addEventListener('click', hideMenu);

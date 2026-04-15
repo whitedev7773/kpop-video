@@ -19,6 +19,10 @@
   user-select: none;
 }
 
+body[data-layout="typeB"] #progressBar > input[type="text"] {
+  font-size: 16px !important;
+}
+
 #progressBar > #currentTime {
   text-align: right;
 }
@@ -89,7 +93,7 @@
   color: #1a1a1a;
   padding: 4px 6px;
   border-radius: 6px;
-  font-family: "Pretendard Variable", sans-serif;
+  font-family: "A2Z", sans-serif;
   font-size: 18px;
   font-weight: 500;
   white-space: nowrap;
@@ -102,10 +106,16 @@ body[data-layout="typeB"] #progressBar {
 }
 
 /* ── 흰색 바 위 진행바: 어두운 색 (라이트, 혼합·어두운가사) */
-body[data-layout="typeB"][data-typeb-theme="light"] #progressBar input[type="text"],
-body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #progressBar input[type="text"],
-body[data-layout="typeB"]:not([data-typeb-theme]) #progressBar input[type="text"] {
-  color: rgba(0, 0, 0, 0.50);
+body[data-layout="typeB"][data-typeb-theme="light"]
+  #progressBar
+  input[type="text"],
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"]
+  #progressBar
+  input[type="text"],
+body[data-layout="typeB"]:not([data-typeb-theme])
+  #progressBar
+  input[type="text"] {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 body[data-layout="typeB"][data-typeb-theme="light"] #progressBar > #body,
@@ -114,35 +124,68 @@ body[data-layout="typeB"]:not([data-typeb-theme]) #progressBar > #body {
   background-color: rgba(0, 0, 0, 0.12);
 }
 
-body[data-layout="typeB"][data-typeb-theme="light"] #progressBar > #body > #fill,
-body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #progressBar > #body > #fill,
+body[data-layout="typeB"][data-typeb-theme="light"]
+  #progressBar
+  > #body
+  > #fill,
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"]
+  #progressBar
+  > #body
+  > #fill,
 body[data-layout="typeB"]:not([data-typeb-theme]) #progressBar > #body > #fill {
   background-color: black;
 }
 
-body[data-layout="typeB"][data-typeb-theme="light"] #progressBar > #body > #fill > #thumb,
-body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #progressBar > #body > #fill > #thumb,
-body[data-layout="typeB"]:not([data-typeb-theme]) #progressBar > #body > #fill > #thumb {
+body[data-layout="typeB"][data-typeb-theme="light"]
+  #progressBar
+  > #body
+  > #fill
+  > #thumb,
+body[data-layout="typeB"][data-typeb-theme="mixed-dark"]
+  #progressBar
+  > #body
+  > #fill
+  > #thumb,
+body[data-layout="typeB"]:not([data-typeb-theme])
+  #progressBar
+  > #body
+  > #fill
+  > #thumb {
   background-color: black;
 }
 
 /* ── 어두운 바 위 진행바: 흰색 (다크, 혼합·밝은가사) */
-body[data-layout="typeB"][data-typeb-theme="dark"] #progressBar input[type="text"],
-body[data-layout="typeB"][data-typeb-theme="mixed-light"] #progressBar input[type="text"] {
-  color: rgba(255, 255, 255, 0.50);
+body[data-layout="typeB"][data-typeb-theme="dark"]
+  #progressBar
+  input[type="text"],
+body[data-layout="typeB"][data-typeb-theme="mixed-light"]
+  #progressBar
+  input[type="text"] {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 body[data-layout="typeB"][data-typeb-theme="dark"] #progressBar > #body,
 body[data-layout="typeB"][data-typeb-theme="mixed-light"] #progressBar > #body {
-  background-color: rgba(255, 255, 255, 0.20);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 body[data-layout="typeB"][data-typeb-theme="dark"] #progressBar > #body > #fill,
-body[data-layout="typeB"][data-typeb-theme="mixed-light"] #progressBar > #body > #fill {
+body[data-layout="typeB"][data-typeb-theme="mixed-light"]
+  #progressBar
+  > #body
+  > #fill {
   background-color: white;
 }
 
-body[data-layout="typeB"][data-typeb-theme="dark"] #progressBar > #body > #fill > #thumb,
-body[data-layout="typeB"][data-typeb-theme="mixed-light"] #progressBar > #body > #fill > #thumb {
+body[data-layout="typeB"][data-typeb-theme="dark"]
+  #progressBar
+  > #body
+  > #fill
+  > #thumb,
+body[data-layout="typeB"][data-typeb-theme="mixed-light"]
+  #progressBar
+  > #body
+  > #fill
+  > #thumb {
   background-color: white;
 }
