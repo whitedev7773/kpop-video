@@ -13,10 +13,11 @@
   font-family: "A2Z", sans-serif;
   text-align: center;
   margin: 0;
-  padding: 0 0 5px 0;
-  line-height: 1.4;
+  padding: 2px 0 8px 0;
+  line-height: 1.6;
   background-color: transparent;
   color: white;
+  overflow: visible;
 }
 
 #musicArtistTextBox > #musicTitle {
@@ -29,4 +30,5 @@
   font-size: 25px;
   font-weight: 200;
   opacity: 70%;
+  line-height: 1.6;
 }

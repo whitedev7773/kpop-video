@@ -31,7 +31,11 @@ export function parseLyricsText(text, mode) {
     // 한줄구분: 각 줄이 하나의 가사
     for (const line of rawLines) {
       const trimmed = line.trim();
-      if (!trimmed) continue;
+      if (!trimmed) {
+        // 공백 라인을 그대로 유지
+        data.push({ part: null, lines: ["\u00A0"] });
+        continue;
+      }
       const { part, text: lyricText } = parseLyricLine(trimmed);
       data.push({ part, lines: [lyricText || "\u00A0"] });
     }
