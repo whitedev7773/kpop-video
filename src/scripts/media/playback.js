@@ -90,7 +90,7 @@ function setupPrevButtonListener() {
 }
 
 /**
- * Tab 단축키: 배경 흐림 토글
+ * Tab 단축키: 배경 흐림 토글 (Type A) / 가사 박스 흐림 토글 (Type B)
  */
 function setupBlurToggleListener() {
   let isBlurred = true;
@@ -100,12 +100,22 @@ function setupBlurToggleListener() {
     if (e.key === "Tab") {
       e.preventDefault();
       isBlurred = !isBlurred;
-      const blurAmount = getComputedStyle(document.documentElement)
-        .getPropertyValue("--blur-amount")
-        .trim();
-      elements.bgVideo.style.filter = isBlurred
-        ? `blur(${blurAmount})`
-        : "blur(0px)";
+      const layout = document.body.getAttribute("data-layout");
+
+      if (layout === "typeB") {
+        // Type B: 가사 박스 흐림 토글
+        elements.lyricsBox.style.backdropFilter = isBlurred
+          ? "blur(70px)"
+          : "blur(0px)";
+      } else {
+        // Type A: 배경 흐림 토글
+        const blurAmount = getComputedStyle(document.documentElement)
+          .getPropertyValue("--blur-amount")
+          .trim();
+        elements.bgVideo.style.filter = isBlurred
+          ? `blur(${blurAmount})`
+          : "blur(0px)";
+      }
     }
   });
 }

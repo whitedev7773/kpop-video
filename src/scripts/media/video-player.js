@@ -11,15 +11,24 @@ import * as toastLoader from "../ui/toast-loader.js";
 export function applyVideo(blob) {
   const url = URL.createObjectURL(blob);
   elements.bgVideo.src = url;
-  elements.bgVideo.load();
 
-  // 음악이 재생 중이면 영상도 재생
-  if (!elements.audio.paused) {
-    elements.bgVideo.play();
+  // 이전 URL 정리 (메모리 누수 방지)
+  if (elements.bgVideo.dataset.previousUrl) {
+    URL.revokeObjectURL(elements.bgVideo.dataset.previousUrl);
   }
+  elements.bgVideo.dataset.previousUrl = url;
 
   // 음악과 시간 동기화
   elements.bgVideo.currentTime = elements.audio.currentTime;
+
+  // 음악이 재생 중이면 영상도 재생
+  // (loadedmetadata 이벤트 후 자동 재생됨)
+  if (!elements.audio.paused) {
+    // 약간의 지연을 두고 재생 시도
+    elements.bgVideo.play().catch(() => {
+      // 자동재생 정책이 차단된 경우 무시
+    });
+  }
 }
 
 /**

@@ -17,7 +17,7 @@
     <script src="./src/scripts/index.js" type="module" defer></script>
   </head>
   <body data-layout="typeA" data-typeb-theme="mixed-dark">
-    <video id="bgVideo" muted playsinline></video>
+    <video id="bgVideo" muted playsinline preload="metadata"></video>
     <div id="bgOverlay"></div>
     <input type="file" id="bgVideoInput" accept="video/*" />
     <div id="toast"></div>
@@ -102,6 +102,69 @@
         <button id="saveLyricsBtn">적용</button>
         <button>닫기</button>
       </form>
+    </dialog>
+    <dialog id="selectLyricsLangDialog">
+      <h1>가사 언어 선택</h1>
+      <p>ZIP 파일의 가사 언어를 선택해주세요.</p>
+      <div
+        id="langOptions"
+        style="
+          width: 100%;
+          display: flex;
+          gap: 10px;
+          margin: 20px 0;
+          justify-content: center;
+        "
+      >
+        <button
+          id="langKorean"
+          style="
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            font-size: 16px;
+            font-weight: 500;
+          "
+        >
+          한국어
+        </button>
+        <button
+          id="langEnglish"
+          style="
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            font-size: 16px;
+            font-weight: 500;
+          "
+        >
+          영어
+        </button>
+        <button
+          id="langJapanese"
+          style="
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            font-size: 16px;
+            font-weight: 500;
+          "
+        >
+          일본어
+        </button>
+      </div>
     </dialog>
     <main>
       <!-- 아트 + 가사 -->

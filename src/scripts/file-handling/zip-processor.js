@@ -6,6 +6,41 @@
 import * as toastLoader from "../ui/toast-loader.js";
 import * as infoSync from "../ui/info-sync.js";
 import { elements } from "../core/dom-utils.js";
+import { LYRICS_MODES } from "../core/constants.js";
+
+/**
+ * 가사 언어 선택 모달 표시 및 선택 대기
+ */
+function selectLyricsLanguage() {
+  return new Promise((resolve) => {
+    if (!elements.selectLyricsLangDialog) {
+      resolve(LYRICS_MODES.KOREAN);
+      return;
+    }
+
+    const langKorean = document.getElementById("langKorean");
+    const langEnglish = document.getElementById("langEnglish");
+    const langJapanese = document.getElementById("langJapanese");
+
+    const handleSelection = (mode) => {
+      elements.selectLyricsLangDialog.close();
+      langKorean.removeEventListener("click", handleKorean);
+      langEnglish.removeEventListener("click", handleEnglish);
+      langJapanese.removeEventListener("click", handleJapanese);
+      resolve(mode);
+    };
+
+    const handleKorean = () => handleSelection(LYRICS_MODES.KOREAN);
+    const handleEnglish = () => handleSelection(LYRICS_MODES.ENGLISH);
+    const handleJapanese = () => handleSelection(LYRICS_MODES.JAPANESE);
+
+    langKorean.addEventListener("click", handleKorean);
+    langEnglish.addEventListener("click", handleEnglish);
+    langJapanese.addEventListener("click", handleJapanese);
+
+    elements.selectLyricsLangDialog.showModal();
+  });
+}
 
 /**
  * ZIP 파일 선택 처리
@@ -38,7 +73,9 @@ export async function handleZipFile(file) {
     // 파일별 처리 단계 정의 (존재하는 것만)
     const hasVideo = !!zip.file("video.mp4");
     if (hasVideo) {
-      toastLoader.showToast("뒷배경 영상은 적용에 시간이 걸릴 수 있습니다.");
+      toastLoader.showToast(
+        "배경 영상 로딩 중입니다. (메타데이터만 먼저 로드됩니다)",
+      );
     }
 
     const steps = [
@@ -60,18 +97,18 @@ export async function handleZipFile(file) {
         handle: async (blob) => window.applyMusic?.(blob),
       },
       {
-        file: zip.file("video.mp4"),
-        label: "배경 영상 적용 중...",
-        handle: async (blob) => window.applyVideo?.(blob),
-      },
-      {
         file: zip.file("lyrics.txt"),
         label: "가사 적용 중...",
         handle: async (text) => {
-          const mode = window.detectLyricsMode?.(text);
+          const mode = await selectLyricsLanguage();
           window.applyLyrics?.(text, mode);
         },
         type: "string",
+      },
+      {
+        file: zip.file("video.mp4"),
+        label: "배경 영상 적용 중...",
+        handle: async (blob) => window.applyVideo?.(blob),
       },
     ].filter((s) => s.file);
 

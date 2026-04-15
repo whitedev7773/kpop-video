@@ -39,6 +39,7 @@ export const elements = {
   saveLyricsBtn: null,
   partIndicator: null,
   partIndicatorTriangle: null,
+  selectLyricsLangDialog: null,
 
   // UI
   toast: null,
@@ -97,6 +98,9 @@ export function initializeElements() {
   elements.partIndicator = document.getElementById("partIndicator");
   elements.partIndicatorTriangle = document.getElementById(
     "partIndicator-triangle",
+  );
+  elements.selectLyricsLangDialog = document.getElementById(
+    "selectLyricsLangDialog",
   );
 
   // UI
