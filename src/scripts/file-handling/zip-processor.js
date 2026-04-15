@@ -27,6 +27,9 @@ function selectLyricsLanguage() {
       langKorean.removeEventListener("click", handleKorean);
       langEnglish.removeEventListener("click", handleEnglish);
       langJapanese.removeEventListener("click", handleJapanese);
+      toastLoader.showToast(
+        "배경 영상 로딩 중입니다. (메타데이터만 먼저 로드됩니다)",
+      );
       resolve(mode);
     };
 
@@ -72,11 +75,6 @@ export async function handleZipFile(file) {
 
     // 파일별 처리 단계 정의 (존재하는 것만)
     const hasVideo = !!zip.file("video.mp4");
-    if (hasVideo) {
-      toastLoader.showToast(
-        "배경 영상 로딩 중입니다. (메타데이터만 먼저 로드됩니다)",
-      );
-    }
 
     const steps = [
       {

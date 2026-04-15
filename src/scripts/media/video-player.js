@@ -46,6 +46,31 @@ function setupDoubleClickListener() {
  */
 function setupMetadataListener() {
   elements.bgVideo.addEventListener("loadedmetadata", () => {
+    // 메타데이터 로드 완료 후 전체 영상 로드 진행도 표시 시작
+    toastLoader.updateLoading("배경 영상 로딩 중... (메타데이터 로드 완료)", 5);
+  });
+}
+
+/**
+ * 영상 버퍼 진행 상황 추적
+ */
+function setupProgressListener() {
+  elements.bgVideo.addEventListener("progress", () => {
+    const buffered = elements.bgVideo.buffered;
+    if (buffered.length > 0 && elements.bgVideo.duration > 0) {
+      // 마지막 버퍼 범위의 끝 시점
+      const bufferedEnd = buffered.end(buffered.length - 1);
+      // 진행률 계산 (5% ~ 95%)
+      const percent = Math.min(
+        90,
+        5 + (bufferedEnd / elements.bgVideo.duration) * 90,
+      );
+      toastLoader.updateLoading("배경 영상 로딩 중...", percent);
+    }
+  });
+
+  // 영상 재생 가능할 때
+  elements.bgVideo.addEventListener("canplay", () => {
     toastLoader.hideLoading?.();
   });
 }
@@ -81,6 +106,7 @@ function setupSeekedListener() {
 export function initialize() {
   setupDoubleClickListener();
   setupMetadataListener();
+  setupProgressListener();
   setupPlayPauseSync();
   setupSeekedListener();
 
