@@ -136,6 +136,20 @@ function setupTimeSyncListener() {
   });
 }
 
+/**
+ * 스페이스바: 음악 제거
+ */
+function setupMusicRemoveListener() {
+  window.addEventListener("keydown", (e) => {
+    if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
+
+    if (e.code === "Space") {
+      e.preventDefault();
+      audioPlayer.removeMusic();
+    }
+  });
+}
+
 export function initialize() {
   window.animationFrameId = animationFrameId;
 
@@ -144,6 +158,7 @@ export function initialize() {
   setupPrevButtonListener();
   setupBlurToggleListener();
   setupTimeSyncListener();
+  setupMusicRemoveListener();
 
   window.openMusicInput = () => elements.musicInput.click();
 }

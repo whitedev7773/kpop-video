@@ -9,11 +9,11 @@
   margin: 0;
   padding: 6px 0;
   list-style: none;
-  background: rgba(30, 30, 30, 0.92);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--dark-menu-bg);
+  backdrop-filter: var(--dark-menu-blur);
+  border: var(--dark-menu-border);
   border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--dark-menu-shadow);
   min-width: 160px;
   user-select: none;
   transform-origin: top left;
@@ -31,7 +31,7 @@
 
 #albumArtMenu li {
   padding: 9px 16px;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--dark-text-primary);
   font-family: "Pretendard Variable", sans-serif;
   font-size: 14px;
   cursor: pointer;
@@ -45,12 +45,12 @@
   height: 1px;
   margin: 5px 0;
   padding: 0;
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--dark-separator);
   cursor: default;
 }
 
 #albumArtMenu .menu-separator:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--dark-separator);
 }
 
 /* TypeB 전용 메뉴 항목 */

@@ -57,3 +57,8 @@ body[data-layout="typeB"][data-typeb-theme="mixed-light"] #musicControl {
   background: rgba(0, 0, 0, 0.75);
   box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.2);
 }
+
+/* Type B 디자인에서는 동영상 블러 제거 */
+body[data-layout="typeB"] #bgVideo {
+  filter: blur(0px);
+}

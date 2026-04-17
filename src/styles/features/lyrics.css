@@ -42,14 +42,14 @@
   backdrop-filter: var(--dialog-blur);
   box-shadow: var(--dialog-shadow);
   font-family: "Pretendard Variable", sans-serif;
-  color: var(--color-text-primary);
+  color: #ffffff;
 }
 
 #lyricsSetting h1 {
   margin-top: 0;
   margin-bottom: 20px;
   font-size: 24px;
-  color: var(--color-text-primary);
+  color: #ffffff;
 }
 
 /* 가사 모드 셀렉터 */
@@ -76,7 +76,7 @@
     color 0.15s;
   font-size: 14px;
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.65);
   border: none;
   background: none;
 }
@@ -87,18 +87,18 @@
 
 #lyricsModeSelector input[type="radio"]:checked + label {
   background: rgba(255, 255, 255, 0.14);
-  color: var(--color-text-primary);
+  color: #ffffff;
   font-weight: 600;
 }
 
 #lyricsModeSelector .mode-option:hover {
   background: rgba(255, 255, 255, 0.08);
-  color: var(--color-text-primary);
+  color: #ffffff;
 }
 
 #lyricsModeSelector .mode-option.active {
   background: rgba(255, 255, 255, 0.14);
-  color: var(--color-text-primary);
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -112,7 +112,7 @@
   padding: 12px;
   font-family: inherit;
   font-size: 16px;
-  color: var(--color-text-primary);
+  color: #ffffff;
   resize: vertical;
   outline: none;
   transition: border-color var(--transition-fast);
@@ -120,7 +120,12 @@
 }
 
 #lyricsInput:focus {
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#lyricsInput::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 #lyricsSetting form {
@@ -142,12 +147,12 @@
 
 #lyricsSetting form button {
   background: var(--color-surface-hover);
-  color: var(--color-text-secondary);
+  color: #ffffff;
 }
 
 #lyricsSetting form button:hover {
   background: rgba(255, 255, 255, 0.14);
-  color: var(--color-text-primary);
+  color: #ffffff;
 }
 
 #saveLyricsBtn {
@@ -166,6 +171,7 @@
   height: 480px;
   transform: translateY(-10px);
   margin-right: 100px;
+  backdrop-filter: none;
 
   /* 모드별 간격 변수 */
   --lyrics-offset-1: 108px;
@@ -259,6 +265,7 @@ body[data-layout="typeB"] #lyricsBox {
   border-radius: 40px;
   backdrop-filter: blur(70px);
   box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.05);
+  transition: backdrop-filter var(--transition-base) ease;
 }
 
 /* Type B 테마별 배경 */
@@ -285,8 +292,8 @@ body[data-layout="typeB"][data-typeb-theme="mixed-dark"] #lyricsBox,
 body[data-layout="typeB"]:not([data-typeb-theme]) #lyricsBox {
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.2)
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.2)
   );
 }
 

@@ -40,6 +40,37 @@ export function applyMusic(blob) {
 }
 
 /**
+ * 음악 파일 제거
+ */
+export function removeMusic() {
+  const previousUrl = elements.audio.src;
+  elements.audio.pause();
+  elements.audio.src = "";
+  elements.audio.load();
+  setPlayState(false);
+
+  if (elements.progressBarFill) {
+    elements.progressBarFill.style.width = "0%";
+  }
+  if (elements.currentTimeText) {
+    elements.currentTimeText.value = "00:00";
+  }
+  if (elements.endTimeText) {
+    elements.endTimeText.value = "00:00";
+  }
+
+  // 메모리 정리
+  if (previousUrl) {
+    URL.revokeObjectURL(previousUrl);
+  }
+
+  // 애니메이션 프레임 취소
+  if (window.animationFrameId) {
+    cancelAnimationFrame(window.animationFrameId);
+  }
+}
+
+/**
  * 메타데이터 로드 완료
  */
 function setupMetadataListener() {
@@ -70,6 +101,7 @@ export function initialize() {
   setupMetadataListener();
   setupEndListener();
   window.applyMusic = applyMusic;
+  window.removeMusic = removeMusic;
 }
 
 export default {
