@@ -2,9 +2,9 @@
  * 우클릭 컨텍스트 메뉴 관리
  */
 
-import { elements } from "../core/dom-utils.js";
-import { q, on, addClass, removeClass } from "../core/dom-utils.js";
-import * as theme from "./theme.js";
+import { elements } from "../core/dom-utils.ts";
+import { q, addClass, removeClass } from "../core/dom-utils.ts";
+import * as theme from "./theme.ts";
 
 let contextMenu;
 
@@ -120,7 +120,7 @@ function setupMenuItemListeners() {
  */
 function setupContextMenuListener() {
   document.addEventListener("contextmenu", (e) => {
-    if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
+    if (["INPUT", "TEXTAREA"].includes((e.target as Element).tagName)) return;
     e.preventDefault();
     showMenu({ x: e.clientX, y: e.clientY });
   });

@@ -2,8 +2,8 @@
  * 가사 타이밍 싱크 및 표시 관리
  */
 
-import { elements } from "../core/dom-utils.js";
-import { TIMING } from "../core/constants.js";
+import { elements } from "../core/dom-utils.ts";
+import { TIMING } from "../core/constants.ts";
 
 let currentLyricIndex = 2;
 let partIndicatorTimeout = null;
@@ -74,7 +74,7 @@ export function setCurrentLyricIndex(newIndex, lyricsData, lyricsElements) {
  */
 export function setupKeyboardNavigation(lyricsData, lyricsElements) {
   window.addEventListener("keydown", (e) => {
-    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    if ((e.target as Element).tagName === "INPUT" || (e.target as Element).tagName === "TEXTAREA") return;
 
     if (e.key === "ArrowUp") {
       if (currentLyricIndex > 2) {
@@ -93,9 +93,9 @@ export function setupKeyboardNavigation(lyricsData, lyricsElements) {
 /**
  * 시간 업데이트 시 가사 동기화
  */
-export function setupTimeSyncListener(lyricsData, lyricsElements) {
+export function setupTimeSyncListener(_lyricsData: any, _lyricsElements: any) {
   window.addEventListener("lyricsTimeUpdate", (e) => {
-    const currentTime = e.detail.currentTime;
+    const currentTime = (e as any).detail.currentTime; void currentTime;
 
     // 현재 시간에 맞는 가사 인덱스 계산 (간단한 구현)
     // 실제로는 타임스탬프 기반 동기화가 필요할 수 있음

@@ -2,8 +2,8 @@
  * 음악과 배경 영상 동기화
  */
 
-import { elements } from "../core/dom-utils.js";
-import { TIMING } from "../core/constants.js";
+import { elements } from "../core/dom-utils.ts";
+import { TIMING } from "../core/constants.ts";
 
 /**
  * 음/영상 시간 동기화

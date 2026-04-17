@@ -1,0 +1,10 @@
+﻿const fs = require('fs');
+let c = fs.readFileSync('src/scripts/file-handling/file-loader.ts', 'utf8');
+c = c.replace('function handleAlbumArtFile(file) {', 'function handleAlbumArtFile(file: File) {');
+c = c.replace('elements.albumArtButton.style.backgroundImage = \url(\)\;', 'elements.albumArtButton.style.backgroundImage = \url(\)\;');
+c = c.replace('function handleMusicFile(file) {', 'function handleMusicFile(file: File) {');
+c = c.replace('function handleVideoFile(file) {', 'function handleVideoFile(file: File) {');
+c = c.replace('handleAlbumArtFile(e.target.files?.[0]);', 'handleAlbumArtFile((e.target as HTMLInputElement).files?.[0] as File);');
+c = c.replace('handleMusicFile(e.target.files?.[0]);', 'handleMusicFile((e.target as HTMLInputElement).files?.[0] as File);');
+c = c.replace('handleVideoFile(e.target.files?.[0]);', 'handleVideoFile((e.target as HTMLInputElement).files?.[0] as File);');
+fs.writeFileSync('src/scripts/file-handling/file-loader.ts', c);

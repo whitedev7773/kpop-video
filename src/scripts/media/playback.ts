@@ -2,9 +2,9 @@
  * 음악 재생/일시정지/탐색 제어
  */
 
-import { elements } from "../core/dom-utils.js";
-import * as audioPlayer from "./audio-player.js";
-import { formatTime } from "../core/time-utils.js";
+import { elements } from '../core/dom-utils.ts';
+import * as audioPlayer from './audio-player.ts';
+import { formatTime } from '../core/time-utils.ts';
 
 let animationFrameId;
 
@@ -26,9 +26,9 @@ function updateProgress() {
 
     // 가사 싱크 이벤트 발생
     window.dispatchEvent(
-      new CustomEvent("lyricsTimeUpdate", {
+      new CustomEvent('lyricsTimeUpdate', {
         detail: { currentTime: elements.audio.currentTime },
-      }),
+      })
     );
 
     animationFrameId = requestAnimationFrame(updateProgress);
@@ -40,7 +40,7 @@ function updateProgress() {
  */
 function setupPlayButtonListener() {
   if (elements.playBtn) {
-    elements.playBtn.addEventListener("click", () => {
+    elements.playBtn.addEventListener('click', () => {
       if (!elements.audio.src) {
         elements.musicInput.click();
         return;
@@ -64,7 +64,7 @@ function setupPlayButtonListener() {
  */
 function setupNextButtonListener() {
   if (elements.nextBtn) {
-    elements.nextBtn.addEventListener("click", () => {
+    elements.nextBtn.addEventListener('click', () => {
       elements.musicInput.click();
     });
   }
@@ -75,7 +75,7 @@ function setupNextButtonListener() {
  */
 function setupPrevButtonListener() {
   if (elements.prevBtn) {
-    elements.prevBtn.addEventListener("click", () => {
+    elements.prevBtn.addEventListener('click', () => {
       if (elements.audio.src) {
         elements.audio.currentTime = 0;
         if (elements.bgVideo.src) {
@@ -83,7 +83,7 @@ function setupPrevButtonListener() {
         }
         updateProgress();
         // 가사 리셋 이벤트
-        window.dispatchEvent(new Event("resetLyrics"));
+        window.dispatchEvent(new Event('resetLyrics'));
       }
     });
   }
@@ -94,27 +94,27 @@ function setupPrevButtonListener() {
  */
 function setupBlurToggleListener() {
   let isBlurred = true;
-  window.addEventListener("keydown", (e) => {
-    if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT', 'TEXTAREA'].includes((e.target as Element).tagName)) return;
 
-    if (e.key === "Tab") {
+    if (e.key === 'Tab') {
       e.preventDefault();
       isBlurred = !isBlurred;
-      const layout = document.body.getAttribute("data-layout");
+      const layout = document.body.getAttribute('data-layout');
 
-      if (layout === "typeB") {
+      if (layout === 'typeB') {
         // Type B: 가사 박스 흐림 토글
         elements.lyricsBox.style.backdropFilter = isBlurred
-          ? "blur(70px)"
-          : "blur(0px)";
+          ? 'blur(70px)'
+          : 'blur(0px)';
       } else {
         // Type A: 배경 흐림 토글
         const blurAmount = getComputedStyle(document.documentElement)
-          .getPropertyValue("--blur-amount")
+          .getPropertyValue('--blur-amount')
           .trim();
         elements.bgVideo.style.filter = isBlurred
           ? `blur(${blurAmount})`
-          : "blur(0px)";
+          : 'blur(0px)';
       }
     }
   });
@@ -125,7 +125,7 @@ function setupBlurToggleListener() {
  */
 function setupTimeSyncListener() {
   const SYNC_THRESHOLD = 0.25;
-  elements.audio.addEventListener("timeupdate", () => {
+  elements.audio.addEventListener('timeupdate', () => {
     if (
       elements.bgVideo.src &&
       Math.abs(elements.bgVideo.currentTime - elements.audio.currentTime) >
@@ -137,15 +137,17 @@ function setupTimeSyncListener() {
 }
 
 /**
- * 스페이스바: 음악 제거
+ * 스페이스바: 음악 일시정지/재생
  */
-function setupMusicRemoveListener() {
-  window.addEventListener("keydown", (e) => {
-    if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
+function setupPlayPauseSpaceListener() {
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT', 'TEXTAREA'].includes((e.target as Element).tagName)) return;
 
-    if (e.code === "Space") {
+    if (e.code === 'Space') {
       e.preventDefault();
-      audioPlayer.removeMusic();
+      if (elements.playBtn) {
+        elements.playBtn.click();
+      }
     }
   });
 }
@@ -158,7 +160,7 @@ export function initialize() {
   setupPrevButtonListener();
   setupBlurToggleListener();
   setupTimeSyncListener();
-  setupMusicRemoveListener();
+  setupPlayPauseSpaceListener();
 
   window.openMusicInput = () => elements.musicInput.click();
 }

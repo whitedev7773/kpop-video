@@ -3,10 +3,10 @@
  * 곡 이름, 음악, 이미지, 영상, 가사를 한 번에 로드
  */
 
-import * as toastLoader from "../ui/toast-loader.js";
-import * as infoSync from "../ui/info-sync.js";
-import { elements } from "../core/dom-utils.js";
-import { LYRICS_MODES } from "../core/constants.js";
+import * as toastLoader from "../ui/toast-loader.ts";
+import * as infoSync from "../ui/info-sync.ts";
+import { elements } from "../core/dom-utils.ts";
+import { LYRICS_MODES } from "../core/constants.ts";
 
 /**
  * 가사 언어 선택 모달 표시 및 선택 대기
@@ -74,7 +74,7 @@ export async function handleZipFile(file) {
     });
 
     // 파일별 처리 단계 정의 (존재하는 것만)
-    const hasVideo = !!zip.file("video.mp4");
+    // const hasVideo = !!zip.file("video.mp4");
 
     const steps = [
       {
@@ -117,7 +117,7 @@ export async function handleZipFile(file) {
       const nextPercent = ((i + 1) / steps.length) * 100;
 
       const content = await step.file.async(step.type ?? "blob", (meta) => {
-        updateLoading(
+        window.updateLoading(
           step.label,
           basePercent + (meta.percent / 100) * (nextPercent - basePercent),
         );

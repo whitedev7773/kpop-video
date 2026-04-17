@@ -3,8 +3,8 @@
  * TypeA와 TypeB 간 양방향 동기화
  */
 
-import { elements } from "../core/dom-utils.js";
-import { q } from "../core/dom-utils.js";
+import { elements } from "../core/dom-utils.ts";
+import { q } from "../core/dom-utils.ts";
 
 /**
  * 앨범 아트와 음악 제목/아티스트를 TypeB에 동기화

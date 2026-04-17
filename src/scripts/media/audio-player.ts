@@ -2,9 +2,9 @@
  * Audio 플레이어 관리
  */
 
-import { elements } from "../core/dom-utils.js";
-import { ICON } from "../core/constants.js";
-import * as toastLoader from "../ui/toast-loader.js";
+import { elements } from "../core/dom-utils.ts";
+import { ICON } from "../core/constants.ts";
+import * as toastLoader from "../ui/toast-loader.ts";
 
 /**
  * 재생 상태 설정

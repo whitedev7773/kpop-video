@@ -2,7 +2,7 @@
  * 가사 텍스트 파싱 로직
  */
 
-import { LYRICS_MODES } from "../core/constants.js";
+import { LYRICS_MODES } from "../core/constants.ts";
 
 /**
  * "[파트] 텍스트" 형식 파싱

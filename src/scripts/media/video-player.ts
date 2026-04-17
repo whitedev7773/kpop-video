@@ -2,8 +2,8 @@
  * Video (배경 영상) 플레이어 관리
  */
 
-import { elements } from "../core/dom-utils.js";
-import * as toastLoader from "../ui/toast-loader.js";
+import { elements } from "../core/dom-utils.ts";
+import * as toastLoader from "../ui/toast-loader.ts";
 
 /**
  * 배경 영상 파일 적용
@@ -36,7 +36,7 @@ export function applyVideo(blob) {
  */
 function setupDoubleClickListener() {
   document.addEventListener("dblclick", (e) => {
-    if (["INPUT", "TEXTAREA", "BUTTON"].includes(e.target.tagName)) return;
+    if (["INPUT", "TEXTAREA", "BUTTON"].includes((e.target as Element).tagName)) return;
     elements.bgVideoInput.click();
   });
 }

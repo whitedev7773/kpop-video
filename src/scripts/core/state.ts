@@ -2,7 +2,7 @@
  * 전역 상태 관리
  */
 
-import { LAYOUT, THEMES, STORAGE_KEYS } from "./constants.js";
+import { LAYOUT, THEMES, STORAGE_KEYS } from "./constants.ts";
 
 // 음악 플레이어 상태
 export const audioState = {

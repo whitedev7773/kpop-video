@@ -2,9 +2,9 @@
  * 개별 파일 로드 (음악, 이미지, 영상)
  */
 
-import { elements } from "../core/dom-utils.js";
-import * as toastLoader from "../ui/toast-loader.js";
-import * as infoSync from "../ui/info-sync.js";
+import { elements } from "../core/dom-utils.ts";
+import * as toastLoader from "../ui/toast-loader.ts";
+import * as infoSync from "../ui/info-sync.ts";
 
 /**
  * 앨범 아트 로드

@@ -7,10 +7,10 @@
   padding: 20px 0;
 }
 
-#musicArtistTextBox > input[type="text"] {
+#musicArtistTextBox > input[type='text'] {
   display: block;
   width: 100%;
-  font-family: "A2Z", sans-serif;
+  font-family: 'A2Z', sans-serif;
   text-align: center;
   margin: 0;
   padding: 2px 0 8px 0;
@@ -26,7 +26,6 @@
 }
 
 #musicArtistTextBox > #artistName {
-  margin-top: 8px;
   font-size: 25px;
   font-weight: 200;
   opacity: 70%;

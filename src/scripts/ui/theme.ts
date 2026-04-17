@@ -2,8 +2,8 @@
  * 레이아웃 및 테마 전환 관리
  */
 
-import { LAYOUT, THEMES, STORAGE_KEYS } from "../core/constants.js";
-import { q } from "../core/dom-utils.js";
+import { LAYOUT, THEMES, STORAGE_KEYS } from "../core/constants.ts";
+import { q } from "../core/dom-utils.ts";
 
 /**
  * 레이아웃 전환 (TypeA ↔ TypeB)

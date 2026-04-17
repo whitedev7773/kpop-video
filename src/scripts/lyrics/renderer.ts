@@ -2,8 +2,8 @@
  * 가사 DOM 렌더링
  */
 
-import { elements } from "../core/dom-utils.js";
-import { LYRICS_MODES } from "../core/constants.js";
+import { elements } from "../core/dom-utils.ts";
+import { LYRICS_MODES } from "../core/constants.ts";
 
 /**
  * 가사 DOM 요소 생성

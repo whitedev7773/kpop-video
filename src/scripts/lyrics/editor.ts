@@ -2,11 +2,11 @@
  * 가사 입력 다이얼로그 관리
  */
 
-import { elements } from "../core/dom-utils.js";
-import { PLACEHOLDERS } from "../core/constants.js";
-import * as parser from "./parser.js";
-import * as renderer from "./renderer.js";
-import * as sync from "./sync.js";
+import { elements } from "../core/dom-utils.ts";
+import { PLACEHOLDERS } from "../core/constants.ts";
+import * as parser from "./parser.ts";
+import * as renderer from "./renderer.ts";
+import * as sync from "./sync.ts";
 
 let lyricsData = [];
 let lyricsMode = "korean";

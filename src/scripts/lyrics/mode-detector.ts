@@ -2,7 +2,7 @@
  * 가사 언어 모드 자동 감지
  */
 
-import { LYRICS_MODES } from "../core/constants.js";
+import { LYRICS_MODES } from "../core/constants.ts";
 
 /**
  * 텍스트에서 가사 모드 자동 감지

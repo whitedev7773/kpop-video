@@ -2,8 +2,8 @@
  * Toast 알림 및 Loading 다이얼로그 관리
  */
 
-import { elements } from "../core/dom-utils.js";
-import { TIMING } from "../core/constants.js";
+import { elements } from "../core/dom-utils.ts";
+import { TIMING } from "../core/constants.ts";
 
 let toastTimer;
 

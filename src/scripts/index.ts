@@ -4,40 +4,40 @@
  */
 
 // Core 모듈
-import * as constants from "./core/constants.js";
-import * as state from "./core/state.js";
-import * as domUtils from "./core/dom-utils.js";
-import * as timeUtils from "./core/time-utils.js";
+import * as constants from "./core/constants.ts";
+import * as state from "./core/state.ts";
+import * as domUtils from "./core/dom-utils.ts";
+import * as timeUtils from "./core/time-utils.ts";
 
 // UI 모듈
-import * as menu from "./ui/menu.js";
-import * as theme from "./ui/theme.js";
-import * as toastLoader from "./ui/toast-loader.js";
-import * as infoSync from "./ui/info-sync.js";
+import * as menu from "./ui/menu.ts";
+import * as theme from "./ui/theme.ts";
+import * as toastLoader from "./ui/toast-loader.ts";
+import * as infoSync from "./ui/info-sync.ts";
 
 // File Handling 모듈
-import * as fileLoader from "./file-handling/file-loader.js";
-import * as zipProcessor from "./file-handling/zip-processor.js";
+import * as fileLoader from "./file-handling/file-loader.ts";
+import * as zipProcessor from "./file-handling/zip-processor.ts";
 
 // Media 모듈
-import * as audioPlayer from "./media/audio-player.js";
-import * as videoPlayer from "./media/video-player.js";
-import * as playback from "./media/playback.js";
-import * as sync from "./media/sync.js";
+import * as audioPlayer from "./media/audio-player.ts";
+import * as videoPlayer from "./media/video-player.ts";
+import * as playback from "./media/playback.ts";
+import * as sync from "./media/sync.ts";
 
 // Lyrics 모듈
-import * as parser from "./lyrics/parser.js";
-import * as renderer from "./lyrics/renderer.js";
-import * as lyricsSync from "./lyrics/sync.js";
-import * as modeDetector from "./lyrics/mode-detector.js";
-import * as editor from "./lyrics/editor.js";
+import * as parser from "./lyrics/parser.ts";
+import * as renderer from "./lyrics/renderer.ts";
+import * as lyricsSync from "./lyrics/sync.ts";
+import * as modeDetector from "./lyrics/mode-detector.ts";
+import * as editor from "./lyrics/editor.ts";
 
 // 전역 글로벌 함수 노출
-import { formatTime } from "./core/time-utils.js";
-import { detectLyricsMode } from "./lyrics/mode-detector.js";
-import { applyLyrics } from "./lyrics/editor.js";
-import { applyMusic } from "./media/audio-player.js";
-import { applyVideo } from "./media/video-player.js";
+import { formatTime } from "./core/time-utils.ts";
+import { detectLyricsMode } from "./lyrics/mode-detector.ts";
+// import { applyLyrics } from "./lyrics/editor.ts";
+// import { applyMusic } from "./media/audio-player.ts";
+// import { applyVideo } from "./media/video-player.ts";
 
 /**
  * 모든 모듈 초기화
