@@ -10,8 +10,8 @@ import { LYRICS_MODES } from "../core/constants.ts";
  */
 export function detectLyricsMode(text) {
   const lines = text.split("\n");
-  const groups = [];
-  let currentGroup = [];
+  const groups: number[] = [];
+  let currentGroup: string[] = [];
 
   for (const line of lines) {
     if (!line.trim()) {

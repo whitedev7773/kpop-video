@@ -8,7 +8,8 @@ import * as parser from "./parser.ts";
 import * as renderer from "./renderer.ts";
 import * as sync from "./sync.ts";
 
-let lyricsData = [];
+import type { LyricEntry } from "./parser.ts";
+let lyricsData: LyricEntry[] = [];
 let lyricsMode = "korean";
 let rawLyricsText = "";
 
@@ -63,10 +64,11 @@ function setupLyricsBoxClickListener() {
         'input[name="lyricsMode"]',
       );
       modeRadios.forEach((r) => {
-        r.checked = r.value === lyricsMode;
-        r.closest(".mode-option").classList.toggle(
+        const radio = r as HTMLInputElement;
+        radio.checked = radio.value === lyricsMode;
+        radio.closest(".mode-option")?.classList.toggle(
           "active",
-          r.value === lyricsMode,
+          radio.value === lyricsMode,
         );
       });
 
@@ -83,19 +85,20 @@ function setupLyricsBoxClickListener() {
 function setupModeSelector() {
   if (elements.modeSelector) {
     elements.modeSelector.addEventListener("change", (e) => {
-      if (e.target.name !== "lyricsMode") return;
+      const target = e.target as HTMLInputElement;
+      if (target.name !== "lyricsMode") return;
 
       elements.modeSelector
         .querySelectorAll(".mode-option")
         .forEach((label) => {
-          label.classList.toggle(
+          (label as HTMLElement).classList.toggle(
             "active",
-            label.dataset.mode === e.target.value,
+            (label as HTMLElement).dataset.mode === target.value,
           );
         });
 
       if (elements.lyricsInput) {
-        elements.lyricsInput.placeholder = PLACEHOLDERS[e.target.value];
+        elements.lyricsInput.placeholder = PLACEHOLDERS[target.value];
       }
     });
   }
@@ -110,7 +113,7 @@ function setupSaveButton() {
       e.preventDefault();
 
       const selectedMode =
-        elements.modeSelector.querySelector('input[name="lyricsMode"]:checked')
+        (elements.modeSelector.querySelector('input[name="lyricsMode"]:checked') as HTMLInputElement | null)
           ?.value || lyricsMode;
 
       const textInput = elements.lyricsInput?.value || "";

@@ -69,47 +69,47 @@ function showMenu(position) {
  * 메뉴 항목 클릭 이벤트 등록
  */
 function setupMenuItemListeners() {
-  q("#menuLoadZip").addEventListener("click", () => {
+  q("#menuLoadZip")?.addEventListener("click", () => {
     hideMenu();
     elements.zipInput.click();
   });
 
-  q("#menuLoadImage").addEventListener("click", () => {
+  q("#menuLoadImage")?.addEventListener("click", () => {
     hideMenu();
     elements.albumArtInput.click();
   });
 
-  q("#menuLoadMusic").addEventListener("click", () => {
+  q("#menuLoadMusic")?.addEventListener("click", () => {
     hideMenu();
     window.openMusicInput?.();
   });
 
-  q("#menuLoadVideo").addEventListener("click", () => {
+  q("#menuLoadVideo")?.addEventListener("click", () => {
     hideMenu();
     window.openVideoInput?.();
   });
 
-  q("#menuToggleLayout").addEventListener("click", () => {
+  q("#menuToggleLayout")?.addEventListener("click", () => {
     hideMenu();
     theme.toggleLayout();
   });
 
-  q("#menuThemeLight").addEventListener("click", () => {
+  q("#menuThemeLight")?.addEventListener("click", () => {
     hideMenu();
     theme.setTheme("light");
   });
 
-  q("#menuThemeDark").addEventListener("click", () => {
+  q("#menuThemeDark")?.addEventListener("click", () => {
     hideMenu();
     theme.setTheme("dark");
   });
 
-  q("#menuThemeMixedLight").addEventListener("click", () => {
+  q("#menuThemeMixedLight")?.addEventListener("click", () => {
     hideMenu();
     theme.setTheme("mixed-light");
   });
 
-  q("#menuThemeMixedDark").addEventListener("click", () => {
+  q("#menuThemeMixedDark")?.addEventListener("click", () => {
     hideMenu();
     theme.setTheme("mixed-dark");
   });

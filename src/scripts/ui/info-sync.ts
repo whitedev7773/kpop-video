@@ -11,20 +11,20 @@ import { q } from "../core/dom-utils.ts";
  */
 export function syncPlayerInfo() {
   // 앨범 아트 동기화
-  const playerArtThumb = q("#playerArtThumb");
+  const playerArtThumb = q("#playerArtThumb") as HTMLElement | null;
   if (playerArtThumb && elements.albumArtButton) {
     playerArtThumb.style.backgroundImage =
       elements.albumArtButton.style.backgroundImage;
   }
 
   // 제목 동기화
-  const playerInfoTitle = q("#playerInfoTitle");
+  const playerInfoTitle = q("#playerInfoTitle") as HTMLInputElement | null;
   if (playerInfoTitle && elements.musicTitle) {
     playerInfoTitle.value = elements.musicTitle.value;
   }
 
   // 아티스트 동기화
-  const playerInfoArtist = q("#playerInfoArtist");
+  const playerInfoArtist = q("#playerInfoArtist") as HTMLInputElement | null;
   if (playerInfoArtist && elements.artistName) {
     playerInfoArtist.value = elements.artistName.value;
   }
@@ -34,21 +34,21 @@ export function syncPlayerInfo() {
  * TypeB 입력 필드 → TypeA로 역방향 동기화
  */
 function setupReverseSyncListeners() {
-  const playerInfoTitle = q("#playerInfoTitle");
-  const playerInfoArtist = q("#playerInfoArtist");
+  const playerInfoTitle = q("#playerInfoTitle") as HTMLInputElement | null;
+  const playerInfoArtist = q("#playerInfoArtist") as HTMLInputElement | null;
 
   if (playerInfoTitle) {
-    playerInfoTitle.addEventListener("input", function () {
+    playerInfoTitle.addEventListener("input", () => {
       if (elements.musicTitle) {
-        elements.musicTitle.value = this.value;
+        elements.musicTitle.value = playerInfoTitle.value;
       }
     });
   }
 
   if (playerInfoArtist) {
-    playerInfoArtist.addEventListener("input", function () {
+    playerInfoArtist.addEventListener("input", () => {
       if (elements.artistName) {
-        elements.artistName.value = this.value;
+        elements.artistName.value = playerInfoArtist.value;
       }
     });
   }

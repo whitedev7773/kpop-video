@@ -23,9 +23,11 @@ export function parseLyricLine(line) {
 /**
  * 모드에 따라 텍스트를 파싱하여 가사 데이터 배열 생성
  */
-export function parseLyricsText(text, mode) {
+export type LyricEntry = { part: string | null; lines: string[] };
+
+export function parseLyricsText(text: string, mode: string) {
   const rawLines = text.split("\n");
-  const data = [];
+  const data: LyricEntry[] = [];
 
   if (mode === LYRICS_MODES.KOREAN) {
     // 한줄구분: 각 줄이 하나의 가사
@@ -42,8 +44,8 @@ export function parseLyricsText(text, mode) {
   } else {
     // 두줄/세줄구분: 빈 줄로 그룹 구분
     const linesPerGroup = mode === LYRICS_MODES.ENGLISH ? 2 : 3;
-    const groups = [];
-    let currentGroup = [];
+    const groups: string[][] = [];
+    let currentGroup: string[] = [];
 
     for (const line of rawLines) {
       const trimmed = line.trim();

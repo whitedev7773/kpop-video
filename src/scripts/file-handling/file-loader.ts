@@ -24,9 +24,9 @@ function handleAlbumArtFile(file) {
   toastLoader.showLoading("앨범 아트 불러오는 중...");
 
   const reader = new FileReader();
-  reader.onload = function (e) {
+  reader.onload = function (e: ProgressEvent<FileReader>) {
     if (elements.albumArtButton) {
-      elements.albumArtButton.style.backgroundImage = `url('${e.target.result}')`;
+      elements.albumArtButton.style.backgroundImage = `url('${(e.target as FileReader).result}')`;
       elements.albumArtButton.textContent = "";
       infoSync.syncPlayerInfo();
     }
@@ -71,7 +71,7 @@ function setupFileInputListeners() {
   // 앨범 아트
   if (elements.albumArtInput) {
     elements.albumArtInput.addEventListener("change", (e) => {
-      handleAlbumArtFile(e.target.files?.[0]);
+      handleAlbumArtFile((e.target as HTMLInputElement).files?.[0]);
     });
   }
 
@@ -83,14 +83,14 @@ function setupFileInputListeners() {
   // 음악
   if (elements.musicInput) {
     elements.musicInput.addEventListener("change", (e) => {
-      handleMusicFile(e.target.files?.[0]);
+      handleMusicFile((e.target as HTMLInputElement).files?.[0]);
     });
   }
 
   // 배경 영상
   if (elements.bgVideoInput) {
     elements.bgVideoInput.addEventListener("change", (e) => {
-      handleVideoFile(e.target.files?.[0]);
+      handleVideoFile((e.target as HTMLInputElement).files?.[0]);
     });
   }
 }

@@ -66,7 +66,7 @@ function updateThemeLabels() {
   for (const option of themeOptions) {
     const el = q(`#${option.id}`);
     if (el) {
-      el.dataset.active = (option.key === current).toString();
+      (el as HTMLElement).dataset.active = (option.key === current).toString();
       el.textContent = (option.key === current ? "✓ " : "    ") + option.label;
     }
   }

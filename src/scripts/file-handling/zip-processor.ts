@@ -24,9 +24,9 @@ function selectLyricsLanguage() {
 
     const handleSelection = (mode) => {
       elements.selectLyricsLangDialog.close();
-      langKorean.removeEventListener("click", handleKorean);
-      langEnglish.removeEventListener("click", handleEnglish);
-      langJapanese.removeEventListener("click", handleJapanese);
+      langKorean?.removeEventListener("click", handleKorean);
+      langEnglish?.removeEventListener("click", handleEnglish);
+      langJapanese?.removeEventListener("click", handleJapanese);
       toastLoader.showToast(
         "배경 영상 로딩 중입니다. (메타데이터만 먼저 로드됩니다)",
       );
@@ -37,9 +37,9 @@ function selectLyricsLanguage() {
     const handleEnglish = () => handleSelection(LYRICS_MODES.ENGLISH);
     const handleJapanese = () => handleSelection(LYRICS_MODES.JAPANESE);
 
-    langKorean.addEventListener("click", handleKorean);
-    langEnglish.addEventListener("click", handleEnglish);
-    langJapanese.addEventListener("click", handleJapanese);
+    langKorean?.addEventListener("click", handleKorean);
+    langEnglish?.addEventListener("click", handleEnglish);
+    langJapanese?.addEventListener("click", handleJapanese);
 
     elements.selectLyricsLangDialog.showModal();
   });

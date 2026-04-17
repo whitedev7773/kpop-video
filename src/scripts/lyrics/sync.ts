@@ -6,7 +6,7 @@ import { elements } from "../core/dom-utils.ts";
 import { TIMING } from "../core/constants.ts";
 
 let currentLyricIndex = 2;
-let partIndicatorTimeout = null;
+let partIndicatorTimeout: ReturnType<typeof setTimeout> | null = null;
 
 /**
  * 파트 인디케이터 표시
@@ -19,7 +19,7 @@ export function showPartIndicator(label) {
     elements.partIndicatorTriangle.classList.add("visible");
   }
 
-  clearTimeout(partIndicatorTimeout);
+  clearTimeout(partIndicatorTimeout ?? undefined);
   partIndicatorTimeout = setTimeout(() => {
     if (elements.partIndicatorTriangle) {
       elements.partIndicatorTriangle.classList.remove("visible");
