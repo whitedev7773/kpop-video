@@ -5,6 +5,7 @@
 import { elements } from "../core/dom-utils.ts";
 import { q, addClass, removeClass } from "../core/dom-utils.ts";
 import * as theme from "./theme.ts";
+import * as tutorial from "./tutorial.ts";
 
 let contextMenu;
 
@@ -27,6 +28,8 @@ function createMenu() {
     <li id="menuThemeDark" class="typeb-only">다크</li>
     <li id="menuThemeMixedLight" class="typeb-only">혼합 · 밝은 가사</li>
     <li id="menuThemeMixedDark" class="typeb-only">혼합 · 어두운 가사</li>
+    <li class="menu-separator"></li>
+    <li id="menuShowTutorial">튜토리얼 보기</li>
   `;
   document.body.appendChild(contextMenu);
 }
@@ -112,6 +115,11 @@ function setupMenuItemListeners() {
   q("#menuThemeMixedDark")?.addEventListener("click", () => {
     hideMenu();
     theme.setTheme("mixed-dark");
+  });
+
+  q("#menuShowTutorial")?.addEventListener("click", () => {
+    hideMenu();
+    tutorial.openTutorial();
   });
 }
 

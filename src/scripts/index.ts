@@ -14,6 +14,7 @@ import * as menu from "./ui/menu.ts";
 import * as theme from "./ui/theme.ts";
 import * as toastLoader from "./ui/toast-loader.ts";
 import * as infoSync from "./ui/info-sync.ts";
+import * as tutorial from "./ui/tutorial.ts";
 
 // File Handling 모듈
 import * as fileLoader from "./file-handling/file-loader.ts";
@@ -65,6 +66,7 @@ function initializeApp() {
 
   // 5. UI 메뉴 초기화
   menu.initialize();
+  tutorial.initialize();
 
   // 6. 음악 정보 동기화 초기화
   infoSync.initialize();
