@@ -2,10 +2,13 @@
  * 전역 상수 정의
  */
 
+import playIcon from '../../assets/icons/play.svg';
+import pauseIcon from '../../assets/icons/pause.svg';
+
 // 아이콘 경로
 export const ICON = {
-  play: '/src/assets/icons/play.svg',
-  pause: '/src/assets/icons/pause.svg',
+  play: playIcon,
+  pause: pauseIcon,
 };
 
 // 타이밍 상수 (밀리초)
