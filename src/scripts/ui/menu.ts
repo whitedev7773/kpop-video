@@ -2,10 +2,10 @@
  * 우클릭 컨텍스트 메뉴 관리
  */
 
-import { elements } from "../core/dom-utils.ts";
-import { q, addClass, removeClass } from "../core/dom-utils.ts";
-import * as theme from "./theme.ts";
-import * as tutorial from "./tutorial.ts";
+import { elements } from '../core/dom-utils.ts';
+import { q, addClass, removeClass } from '../core/dom-utils.ts';
+import * as theme from './theme.ts';
+import * as tutorial from './tutorial.ts';
 
 let contextMenu;
 
@@ -13,8 +13,8 @@ let contextMenu;
  * 메뉴 생성
  */
 function createMenu() {
-  contextMenu = document.createElement("ul");
-  contextMenu.id = "albumArtMenu";
+  contextMenu = document.createElement('ul');
+  contextMenu.id = 'albumArtMenu';
   contextMenu.innerHTML = `
     <li id="menuLoadZip">ZIP으로 불러오기</li>
     <li class="menu-separator"></li>
@@ -38,15 +38,15 @@ function createMenu() {
  * 메뉴 숨기기
  */
 export function hideMenu() {
-  if (!contextMenu || !contextMenu.classList.contains("visible")) return;
-  removeClass(contextMenu, "visible");
-  addClass(contextMenu, "hiding");
+  if (!contextMenu || !contextMenu.classList.contains('visible')) return;
+  removeClass(contextMenu, 'visible');
+  addClass(contextMenu, 'hiding');
   contextMenu.addEventListener(
-    "animationend",
+    'animationend',
     () => {
-      removeClass(contextMenu, "hiding");
+      removeClass(contextMenu, 'hiding');
     },
-    { once: true },
+    { once: true }
   );
 }
 
@@ -56,10 +56,10 @@ export function hideMenu() {
  */
 function showMenu(position) {
   if (!contextMenu) return;
-  removeClass(contextMenu, "visible");
+  removeClass(contextMenu, 'visible');
   // reflow 강제
   void contextMenu.offsetWidth;
-  addClass(contextMenu, "visible");
+  addClass(contextMenu, 'visible');
 
   // 화면 밖 위치 보정
   const menuW = contextMenu.offsetWidth;
@@ -72,52 +72,52 @@ function showMenu(position) {
  * 메뉴 항목 클릭 이벤트 등록
  */
 function setupMenuItemListeners() {
-  q("#menuLoadZip")?.addEventListener("click", () => {
+  q('#menuLoadZip')?.addEventListener('click', () => {
     hideMenu();
     elements.zipInput.click();
   });
 
-  q("#menuLoadImage")?.addEventListener("click", () => {
+  q('#menuLoadImage')?.addEventListener('click', () => {
     hideMenu();
     elements.albumArtInput.click();
   });
 
-  q("#menuLoadMusic")?.addEventListener("click", () => {
+  q('#menuLoadMusic')?.addEventListener('click', () => {
     hideMenu();
     window.openMusicInput?.();
   });
 
-  q("#menuLoadVideo")?.addEventListener("click", () => {
+  q('#menuLoadVideo')?.addEventListener('click', () => {
     hideMenu();
     window.openVideoInput?.();
   });
 
-  q("#menuToggleLayout")?.addEventListener("click", () => {
+  q('#menuToggleLayout')?.addEventListener('click', () => {
     hideMenu();
     theme.toggleLayout();
   });
 
-  q("#menuThemeLight")?.addEventListener("click", () => {
+  q('#menuThemeLight')?.addEventListener('click', () => {
     hideMenu();
-    theme.setTheme("light");
+    theme.setTheme('light');
   });
 
-  q("#menuThemeDark")?.addEventListener("click", () => {
+  q('#menuThemeDark')?.addEventListener('click', () => {
     hideMenu();
-    theme.setTheme("dark");
+    theme.setTheme('dark');
   });
 
-  q("#menuThemeMixedLight")?.addEventListener("click", () => {
+  q('#menuThemeMixedLight')?.addEventListener('click', () => {
     hideMenu();
-    theme.setTheme("mixed-light");
+    theme.setTheme('mixed-light');
   });
 
-  q("#menuThemeMixedDark")?.addEventListener("click", () => {
+  q('#menuThemeMixedDark')?.addEventListener('click', () => {
     hideMenu();
-    theme.setTheme("mixed-dark");
+    theme.setTheme('mixed-dark');
   });
 
-  q("#menuShowTutorial")?.addEventListener("click", () => {
+  q('#menuShowTutorial')?.addEventListener('click', () => {
     hideMenu();
     tutorial.openTutorial();
   });
@@ -127,15 +127,15 @@ function setupMenuItemListeners() {
  * 글로벌 우클릭 이벤트 등록
  */
 function setupContextMenuListener() {
-  document.addEventListener("contextmenu", (e) => {
-    if (["INPUT", "TEXTAREA"].includes((e.target as Element).tagName)) return;
+  document.addEventListener('contextmenu', (e) => {
+    if (['INPUT', 'TEXTAREA'].includes((e.target as Element).tagName)) return;
     e.preventDefault();
     showMenu({ x: e.clientX, y: e.clientY });
   });
 
-  document.addEventListener("click", hideMenu);
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") hideMenu();
+  document.addEventListener('click', hideMenu);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') hideMenu();
   });
 }
 

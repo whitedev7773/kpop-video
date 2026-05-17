@@ -1,4 +1,4 @@
-import { elements } from "../core/dom-utils.ts";
+import { elements } from '../core/dom-utils.ts';
 
 let currentStep = 1;
 const totalSteps = 3;
@@ -18,12 +18,12 @@ export function openTutorial() {
  */
 export function closeTutorial() {
   if (!elements.tutorialDialog) return;
-  elements.tutorialDialog.classList.add("closing");
+  elements.tutorialDialog.classList.add('closing');
   setTimeout(() => {
     elements.tutorialDialog.close();
-    elements.tutorialDialog.classList.remove("closing");
+    elements.tutorialDialog.classList.remove('closing');
   }, 200); // Wait for the tutorialOut animation
-  
+
   // 튜토리얼을 한 번이라도 봤다면 로컬 스토리지에 저장 (선택 사항이나 첫 방문 여부로 활용)
   localStorage.setItem('tutorial-shown', 'true');
 }
@@ -37,9 +37,9 @@ function updateTutorialDOM() {
   // 슬라이드 클래스 변경
   const slides = elements.tutorialDialog.querySelectorAll('.tutorial-slide');
   slides.forEach((slide) => {
-    const step = parseInt((slide as HTMLElement).dataset.step || "1", 10);
+    const step = parseInt((slide as HTMLElement).dataset.step || '1', 10);
     slide.classList.remove('active', 'from-left', 'from-right');
-    
+
     if (step === currentStep) {
       slide.classList.add('active');
     }
@@ -60,9 +60,14 @@ function updateTutorialDOM() {
   const nextBtn = document.getElementById('tutorialNext');
   const doneBtn = document.getElementById('tutorialDone');
 
-  if (prevBtn) prevBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
-  if (nextBtn) nextBtn.style.display = currentStep === totalSteps ? 'none' : 'inline-block';
-  if (doneBtn) doneBtn.style.display = currentStep === totalSteps ? 'inline-block' : 'none';
+  if (prevBtn)
+    prevBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+  if (nextBtn)
+    nextBtn.style.display =
+      currentStep === totalSteps ? 'none' : 'inline-block';
+  if (doneBtn)
+    doneBtn.style.display =
+      currentStep === totalSteps ? 'inline-block' : 'none';
 }
 
 /**
